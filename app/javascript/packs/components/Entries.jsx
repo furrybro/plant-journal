@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "semantic-ui-react";
 import EntryForm from "./EntryForm";
+import Moment from "moment";
 
 
 function Entries({ organismId }) {
@@ -13,10 +14,13 @@ function Entries({ organismId }) {
     }, []);
 
     const renderEachEntry = entries.map((entry) => {
+        const formatDate = Moment(entry.date).format('MMMM Do YYYY, h:mm a')
+
         return (
             <React.Fragment>
                 <Card>
-                    <Card.Header>{entry.note}</Card.Header>
+                    <Card.Header>{formatDate}</Card.Header>
+                    <Card.Description>{entry.note}</Card.Description>
                 </Card>
             </React.Fragment>
         );
