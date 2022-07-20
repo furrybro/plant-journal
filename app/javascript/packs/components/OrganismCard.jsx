@@ -2,10 +2,19 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card } from "semantic-ui-react";
 
-function OrganismCard({ name, species, orgid, setOrganismId }) {
+function OrganismCard({ name, species, organismId, setOrganismId, organisms, setOrganisms }) {
 
     function handleEntryClick(e) {
         setOrganismId(e.target.value);
+    }
+
+    function handleDeleteOrganism(e) {
+        fetch(`/api/v1/organisms/${e.target.value}`, {
+            method: "DELETE"
+        })
+        .then(() => fetch(`/api/v1/organisms`))
+        .then(result => result.json())
+        .then(result => setOrganisms(result));
     }
 
     return (
@@ -15,8 +24,9 @@ function OrganismCard({ name, species, orgid, setOrganismId }) {
                     <Card.Header>{name}</Card.Header>
                     <Card.Description>{species}</Card.Description>
                     <Link to="/entries">
-                        <Button value={orgid} onClick={handleEntryClick}>see entries</Button>
+                        <Button value={organismId} onClick={handleEntryClick}>see entries</Button>
                     </Link>
+                    <Button value={organismId} onClick={handleDeleteOrganism}>plant died :(</Button>
                 </Card.Content>
             </Card>
         </React.Fragment>

@@ -13,7 +13,7 @@ function Garden({ setOrganismId, user }) {
 
     return (
         <React.Fragment>
-            <Organisms organisms={organisms} setOrganismId={setOrganismId}/>
+            <Organisms organisms={organisms} setOrganisms={setOrganisms} setOrganismId={setOrganismId}/>
             <OrganismForm user={user} organisms={organisms} setOrganisms={setOrganisms}/>
         </React.Fragment>
     );

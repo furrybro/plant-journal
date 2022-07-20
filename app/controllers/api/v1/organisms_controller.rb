@@ -21,25 +21,14 @@ class Api::V1::OrganismsController < ApplicationController
 
   # PATCH/PUT /organisms/1 or /organisms/1.json
   def update
-    respond_to do |format|
-      if @organism.update(organism_params)
-        format.html { redirect_to organism_url(@organism), notice: "Organism was successfully updated." }
-        format.json { render :show, status: :ok, location: @organism }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @organism.errors, status: :unprocessable_entity }
-      end
-    end
+  
   end
 
   # DELETE /organisms/1 or /organisms/1.json
   def destroy
-    @organism.destroy
-
-    respond_to do |format|
-      format.html { redirect_to organisms_url, notice: "Organism was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    organism = find_organism
+    organism.destroy
+    head :no_content
   end
 
   private

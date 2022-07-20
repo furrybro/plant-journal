@@ -25,6 +25,9 @@ class Api::V1::EntriesController < ApplicationController
 
   # DELETE /entries/1 or /entries/1.json
   def destroy
+    entry = find_entry
+    entry.destroy
+    head :no_content
   end
 
   private
