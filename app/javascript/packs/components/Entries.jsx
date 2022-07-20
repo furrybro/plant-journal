@@ -13,11 +13,11 @@ function Entries({ organismId }) {
 
     const renderEachEntry = entries.map((entry) => {
         return (
-            <>
+            <React.Fragment>
                 <Card>
                     <Card.Header>{entry.note}</Card.Header>
                 </Card>
-            </>
+            </React.Fragment>
         );
     });
 
