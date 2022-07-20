@@ -1,23 +1,18 @@
-class EntriesController < ApplicationController
-  before_action :set_entry, only: %i[ show edit update destroy ]
+class Api::V1::EntriesController < ApplicationController
+  # before_action :set_entry, only: %i[ show edit update destroy ]
 
   # GET /entries or /entries.json
   def index
     @entries = Entry.all
+    render json: @entries
   end
 
   # GET /entries/1 or /entries/1.json
   def show
+    entry = Entry.where(organism_id: params[:id])
+    render json: entry
   end
 
-  # GET /entries/new
-  def new
-    @entry = Entry.new
-  end
-
-  # GET /entries/1/edit
-  def edit
-  end
 
   # POST /entries or /entries.json
   def create

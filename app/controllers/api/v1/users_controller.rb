@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
   # before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
@@ -8,7 +8,6 @@ class UsersController < ApplicationController
 
   # GET /me
   def show
-    puts "hello world"
     return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     user = User.find(session[:user_id])
     render json: user

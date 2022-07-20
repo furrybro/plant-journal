@@ -1,22 +1,16 @@
-class OrganismsController < ApplicationController
-  before_action :set_organism, only: %i[ show edit update destroy ]
+class Api::V1::OrganismsController < ApplicationController
+  # before_action :set_organism, only: %i[ show edit update destroy ]
 
   # GET /organisms or /organisms.json
   def index
     @organisms = Organism.all
+    render json: @organisms
   end
 
   # GET /organisms/1 or /organisms/1.json
   def show
-  end
-
-  # GET /organisms/new
-  def new
-    @organism = Organism.new
-  end
-
-  # GET /organisms/1/edit
-  def edit
+    @organism = find_organism
+    render json: @organism
   end
 
   # POST /organisms or /organisms.json
@@ -59,8 +53,8 @@ class OrganismsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_organism
-      @organism = Organism.find(params[:id])
+    def find_organism
+      Organism.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

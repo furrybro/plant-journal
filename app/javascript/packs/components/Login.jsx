@@ -6,8 +6,9 @@ function Login({ setUser }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("/login", {
+        fetch("/api/v1/login", {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
