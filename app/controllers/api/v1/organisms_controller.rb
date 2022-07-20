@@ -3,29 +3,20 @@ class Api::V1::OrganismsController < ApplicationController
 
   # GET /organisms or /organisms.json
   def index
-    @organisms = Organism.all
-    render json: @organisms
+    organisms = Organism.all
+    render json: organisms
   end
 
   # GET /organisms/1 or /organisms/1.json
   def show
-    @organism = find_organism
-    render json: @organism
+    organism = find_organism
+    render json: organism
   end
 
   # POST /organisms or /organisms.json
   def create
-    @organism = Organism.new(organism_params)
-
-    respond_to do |format|
-      if @organism.save
-        format.html { redirect_to organism_url(@organism), notice: "Organism was successfully created." }
-        format.json { render :show, status: :created, location: @organism }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @organism.errors, status: :unprocessable_entity }
-      end
-    end
+    organism = Organism.create!(organism_params)
+    render json: organism, status: :created
   end
 
   # PATCH/PUT /organisms/1 or /organisms/1.json
@@ -59,6 +50,6 @@ class Api::V1::OrganismsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def organism_params
-      params.require(:organism).permit(:name, :species, :user_id)
+      params.permit(:name, :species, :user_id)
     end
 end

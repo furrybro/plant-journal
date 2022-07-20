@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Organisms from "./Organisms";
+import OrganismForm from "./OrganismForm";
 
-function Garden({ setOrganismId }) {
+function Garden({ setOrganismId, user }) {
     const [ organisms, setOrganisms ] = useState([]);
 
     useEffect(() => {
@@ -10,12 +11,10 @@ function Garden({ setOrganismId }) {
         .then(result => setOrganisms(result));
     }, []);
 
-    console.log(organisms, "organisms")
-
     return (
         <React.Fragment>
             <Organisms organisms={organisms} setOrganismId={setOrganismId}/>
-            {/* form to go here */}
+            <OrganismForm user={user} organisms={organisms} setOrganisms={setOrganisms}/>
         </React.Fragment>
     );
 }
