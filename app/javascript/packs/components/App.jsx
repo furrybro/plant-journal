@@ -25,7 +25,7 @@ function App() {
             <main>
                 {user ? (
                         <Routes>
-                            <Route path="/" element={<Garden setOrganismId={setOrganismId} user={user}/>} />
+                            <Route path="/" element={<Garden organismId={organismId} setOrganismId={setOrganismId} user={user}/>} />
                             <Route path="/entries" element={<Entries organismId={organismId}/>} />                            
                         </Routes>
                 ) : (

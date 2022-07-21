@@ -21,7 +21,9 @@ class Api::V1::OrganismsController < ApplicationController
 
   # PATCH/PUT /organisms/1 or /organisms/1.json
   def update
-  
+    organism = find_organism
+    organism.update!(organism_params)
+    render json: organism
   end
 
   # DELETE /organisms/1 or /organisms/1.json

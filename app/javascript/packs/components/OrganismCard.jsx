@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card } from "semantic-ui-react";
 
-function OrganismCard({ name, species, organismId, setOrganismId, organisms, setOrganisms }) {
+function OrganismCard({ name, species, organismId, setOrganismId, organisms, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit }) {
 
     function handleEntryClick(e) {
         setOrganismId(e.target.value);
@@ -17,6 +17,12 @@ function OrganismCard({ name, species, organismId, setOrganismId, organisms, set
         .then(result => setOrganisms(result));
     }
 
+    function sendOrganismToEdit(e) {
+        setOrganismNameToEdit(e.target.value); 
+        setOrganismSpeciesToEdit(e.target.title);
+        setOrganismId(e.target.name);
+    }
+
     return (
         <React.Fragment>
             <Card>
@@ -26,6 +32,7 @@ function OrganismCard({ name, species, organismId, setOrganismId, organisms, set
                     <Link to="/entries">
                         <Button value={organismId} onClick={handleEntryClick}>see entries</Button>
                     </Link>
+                    <Button value={name} title={species} name={organismId} onClick={sendOrganismToEdit}>edit plant</Button>
                     <Button value={organismId} onClick={handleDeleteOrganism}>plant died :(</Button>
                 </Card.Content>
             </Card>
