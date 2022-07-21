@@ -21,6 +21,9 @@ class Api::V1::EntriesController < ApplicationController
 
   # PATCH/PUT /entries/1 or /entries/1.json
   def update
+    entry = find_entry
+    entry.update!(entry_params)
+    render json: entry
   end
 
   # DELETE /entries/1 or /entries/1.json

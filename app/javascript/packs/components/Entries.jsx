@@ -5,7 +5,10 @@ import Moment from "moment";
 
 
 function Entries({ organismId }) {
-    const [entries, setEntries] = useState([]);
+    const [ entries, setEntries ] = useState([]);
+    const [ noteToEdit, setNoteToEdit ] = useState("");
+    const [ dateToEdit, setDateToEdit ] = useState("");
+    const [ entryId, setEntryId ] = useState();
 
     useEffect(() => {
         fetch(`/api/v1/entries/${organismId}`)
@@ -25,12 +28,20 @@ function Entries({ organismId }) {
             .then(result => setEntries(result));
         }
 
+        function handleEditEntry() {
+            let editDate = Moment(entry.date).local().format('yyyy-MM-DThh:mm')
+            setNoteToEdit(entry.note);
+            setDateToEdit(editDate);
+            setEntryId(entry.id);
+            console.log(editDate, "date to edit before submit")
+        }
+
         return (
             <React.Fragment>
-                <Card>
+                <Card key={entry.id}>
                     <Card.Header>{formatDate}</Card.Header>
                     <Card.Description>{entry.note}</Card.Description>
-                    <Button>edit</Button>
+                    <Button onClick={handleEditEntry}>edit</Button>
                     <Button value={entry.id} onClick={handleDeleteEntry}>delete</Button>
                 </Card>
             </React.Fragment>
@@ -41,7 +52,7 @@ function Entries({ organismId }) {
         <React.Fragment>
             <h1>Entries</h1>
             {renderEachEntry}
-            <EntryForm organismId={organismId} entries={entries} setEntries={setEntries}/>
+            <EntryForm organismId={organismId} entries={entries} setEntries={setEntries} noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} dateToEdit={dateToEdit} setDateToEdit={setDateToEdit} entryId={entryId}/>
         </React.Fragment>
     );
 }
