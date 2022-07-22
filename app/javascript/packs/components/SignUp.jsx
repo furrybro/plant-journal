@@ -1,71 +1,88 @@
 import React, { useState } from "react";
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import "/Users/jeena/Development/code/phase-5/plant-journal/app/assets/stylesheets/application.css";
+
 
 function SignUp({ setUser }) {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        fetch("/api/v1/users/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username,
-            email,
-            password,
-            password_confirmation: passwordConfirmation,
-          }),
-        }).then((r) => {
-          if (r.ok) {
-            r.json().then((user) => setUser(user));
-          }
-        });
-    }
+	function handleSubmit(e) {
 
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <h1>Sign Up</h1>
-                <label htmlFor="username">Username</label>
-                <input
-                    type="text"
-                    id="username"
-                    autoComplete="off"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <label htmlFor="email">Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    autoComplete="off"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="current-password"
-                />
-                <label htmlFor="password">Password Confirmation</label>
-                <input
-                    type="password"
-                    id="password_confirmation"
-                    value={passwordConfirmation}
-                    onChange={(e) => setPasswordConfirmation(e.target.value)}
-                    autoComplete="current-password"
-                />
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
-    );
+		console.log(username, email, password, passwordConfirmation, "hopefull ythis works")
+		e.preventDefault();
+		fetch("/api/v1/signup", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				username,
+				email,
+				password,
+				password_confirmation: passwordConfirmation,
+			}),
+		}).then((r) => {
+			if (r.ok) {
+				r.json().then((user) => setUser(user));
+			}
+		});
+	}
+
+	return (
+		<div className="App">
+			<h2>Sign Up</h2>
+			<Form className="form" onSubmit={handleSubmit}>
+				<FormGroup>
+					<Label htmlFor="newusername">Username</Label>
+					<Input
+						type="text"
+						// name="username"
+						id="newusername"
+						value={username}
+						placeholder="example123"
+						onChange={(e) => setUsername(e.target.value)}
+					/>
+				</FormGroup>
+				<FormGroup>
+					<Label htmlFor="newemail">Email</Label>
+					<Input
+						type="email"
+						// name="email"
+						id="newemail"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						placeholder="example@example.com"
+					/>
+				</FormGroup>
+				<FormGroup>
+					<Label htmlFor="password">Password</Label>
+					<Input
+						type="password"
+						// name="newpassword"
+						id="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						placeholder="********"
+					/>
+				</FormGroup>
+				<FormGroup>
+					<Label htmlFor="password_confirmation">Confirm Password</Label>
+					<Input
+						type="password"
+						// name="password"
+						id="password_confirmation"
+						value={passwordConfirmation}
+						onChange={(e) => setPasswordConfirmation(e.target.value)}
+						placeholder="********"
+					/>
+				</FormGroup>
+				<Button>Submit</Button>
+			</Form>
+		</div>
+	);
 }
 
 export default SignUp;

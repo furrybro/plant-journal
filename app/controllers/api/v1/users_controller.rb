@@ -16,7 +16,6 @@ class Api::V1::UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
   end
 
   # GET /users/1/edit
@@ -26,7 +25,7 @@ class Api::V1::UsersController < ApplicationController
   # POST /signup
   def create
     user = User.create(user_params)
-    session[:user_id] = user.id
+    # session[:user_id] = user.id
     if user.valid?
         render json: user, status: :created
     else
@@ -60,11 +59,11 @@ class Api::V1::UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      User.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :email, :password, :password_confirmation)
+      params.permit(:username, :email, :password, :password_confirmation)
     end
 end
