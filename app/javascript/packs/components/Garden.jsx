@@ -8,7 +8,7 @@ function Garden({ organismId, setOrganismId, user }) {
     const [ organismSpeciesToEdit, setOrganismSpeciesToEdit ] = useState("");
 
     useEffect(() => {
-        fetch("/api/v1/organisms")
+        fetch(`/api/v1/organisms/${user.id}`)
         .then(result => result.json())
         .then(result => setOrganisms(result));
     }, []);

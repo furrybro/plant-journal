@@ -20,11 +20,12 @@ function NavBar({ user, setUser }) {
                         <button onClick={handleLogoutClick}>Logout</button>
                     </React.Fragment>
                 ) : (
-                    <React.Fragment>
-                        <Link to="/signup">Signup</Link><br>
-                        </br>
-                        <Link to="/login">Login</Link>
-                    </React.Fragment>
+                    null
+                    // <React.Fragment>
+                    //     <Link to="/signup">Signup</Link><br>
+                    //     </br>
+                    //     <Link to="/login">Login</Link>
+                    // </React.Fragment>
                 )}
             </div>
         </header>

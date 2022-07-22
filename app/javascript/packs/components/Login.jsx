@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Button, Form, FormGroup, Input, Label, FormText } from "reactstrap";
+import "/Users/jeena/Development/code/phase-5/plant-journal/app/assets/stylesheets/application.css";
+
 
 function Login({ setUser }) {
     const [username, setUsername] = useState("");
@@ -21,27 +24,35 @@ function Login({ setUser }) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <h1>Login</h1>
-                <label htmlFor="username">Username</label>
-                <input
-                    type="text"
-                    id="username"
-                    autoComplete="off"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Login</button>
-            </form>
+        <div className="formdiv">
+            <h1>Login</h1>
+            <Form className="form" onSubmit={handleSubmit}>
+                <FormGroup>
+                    <Label htmlFor="username">Username</Label>
+                    <Input
+                        type="text"
+                        id="username"
+                        autoComplete="off"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </FormGroup>
+                <Button type="submit">Login</Button>
+                <br></br>
+                <FormText>
+                    New to us? <a href="/signup">Sign up here.</a>
+                </FormText>
+            </Form>
         </div>
     );
 }

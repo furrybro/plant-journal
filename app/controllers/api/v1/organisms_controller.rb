@@ -9,7 +9,7 @@ class Api::V1::OrganismsController < ApplicationController
 
   # GET /organisms/1 or /organisms/1.json
   def show
-    organism = find_organism
+    organism = Organism.where(user_id: params[:id])
     render json: organism
   end
 

@@ -26,7 +26,7 @@ function App() {
     // console.log("the user is currently logged", user ? "in" : "out")
 
     return (
-        <React.Fragment>
+        <div className="succulent">
             <BrowserRouter>
             <NavBar user={user} setUser={setUser}/>
             <main>
@@ -45,7 +45,7 @@ function App() {
                 )}
             </main>
             </BrowserRouter>
-        </React.Fragment>
+        </div>
         
     );
 }

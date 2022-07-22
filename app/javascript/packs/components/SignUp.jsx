@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label, FormText } from "reactstrap";
 import "/Users/jeena/Development/code/phase-5/plant-journal/app/assets/stylesheets/application.css";
 
 
@@ -32,7 +32,7 @@ function SignUp({ setUser }) {
 	}
 
 	return (
-		<div className="App">
+		<div className="formdiv">
 			<h2>Sign Up</h2>
 			<Form className="form" onSubmit={handleSubmit}>
 				<FormGroup>
@@ -80,6 +80,10 @@ function SignUp({ setUser }) {
 					/>
 				</FormGroup>
 				<Button>Submit</Button>
+				<br></br>
+                <FormText>
+                    Already have an account? <a href="/login">Login here.</a>
+                </FormText>
 			</Form>
 		</div>
 	);
