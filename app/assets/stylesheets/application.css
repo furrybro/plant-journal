@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+ body {
+    font-family: 'Poppins', sans-serif;
+ }
+
  .succulent {
     /* background-image: url("../images/succulent.jpeg");
     background-size: cover;
@@ -44,7 +48,10 @@
  } */
 
  .navbar {
-    background-color: aqua;
+    background-color: rgba(176, 202, 148);
+    position: fixed;
+    top: 0;
+    width: 100%;
  }
 
  .formdiv {

@@ -7,46 +7,51 @@ import NavBar from "./NavBar";
 import Entries from "./Entries";
 
 function App() {
-    const [ user, setUser ] = useState(null);
-    const [ organismId, setOrganismId ] = useState();
+    const [user, setUser] = useState(null);
+    const [organismId, setOrganismId] = useState();
 
     useEffect(() => {
         fetch("/api/v1/me", {
             headers: {
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accepts": "application/json"
-            }})
-            .then((r) => {
-            if (r.ok) {
-                r.json().then((user) => setUser(user));
             }
-        });
+        })
+            .then((r) => {
+                if (r.ok) {
+                    r.json().then((user) => setUser(user));
+                }
+            });
     }, []);
 
     // console.log("the user is currently logged", user ? "in" : "out")
 
     return (
-        <div className="succulent">
-            <BrowserRouter>
-            <NavBar user={user} setUser={setUser}/>
-            <main>
-                {user ? (
-                        <Routes>
-                            <Route path="/" element={<Garden organismId={organismId} setOrganismId={setOrganismId} user={user}/>} />
-                            <Route path="/entries" element={<Entries organismId={organismId}/>} />                      
-                        </Routes>
-                ) : (
-                        <Routes>
-                            <Route path="/" element={<Login setUser={setUser}  />} />
-                            <Route path="/signup" element={<SignUp setUser={setUser} />} />
-                            <Route path="/login" element={<Login setUser={setUser} />} />
-                            <Route path="/entries" element={<Entries organismId={organismId}/>} />  
-                        </Routes>
-                )}
-            </main>
-            </BrowserRouter>
-        </div>
-        
+        <React.Fragment>
+            <NavBar user={user} setUser={setUser} />
+            <div className="succulent">
+                <BrowserRouter>
+
+                    <main>
+                        {user ? (
+                            <Routes>
+                                <Route path="/" element={<Garden organismId={organismId} setOrganismId={setOrganismId} user={user} />} />
+                                <Route path="/entries" element={<Entries organismId={organismId} />} />
+                            </Routes>
+                        ) : (
+                            <Routes>
+                                <Route path="/" element={<Login setUser={setUser} />} />
+                                <Route path="/signup" element={<SignUp setUser={setUser} />} />
+                                <Route path="/login" element={<Login setUser={setUser} />} />
+                                <Route path="/entries" element={<Entries organismId={organismId} />} />
+                            </Routes>
+                        )}
+                    </main>
+                </BrowserRouter>
+            </div>
+        </React.Fragment>
+
+
     );
 }
 
