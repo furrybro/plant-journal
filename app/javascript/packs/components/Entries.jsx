@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button } from "semantic-ui-react";
 import EntryForm from "./EntryForm";
-import Moment from "moment";
+import { DateTime } from "luxon";
 
 
 function Entries({ organismId }) {
     const [ entries, setEntries ] = useState([]);
     const [ noteToEdit, setNoteToEdit ] = useState("");
-    const [ dateToEdit, setDateToEdit ] = useState("");
+    const [ dateToEdit, setDateToEdit ] = useState(DateTime.now());
     const [ entryId, setEntryId ] = useState();
 
     useEffect(() => {
@@ -17,7 +17,8 @@ function Entries({ organismId }) {
     }, []);
 
     const renderEachEntry = entries.map((entry) => {
-        const formatDate = Moment(entry.date).format('MMMM Do YYYY, h:mm a')
+        let entryDate = DateTime.fromISO(entry.date)
+        let formatDate = entryDate.toLocaleString(DateTime.DATETIME_FULL)
 
         function handleDeleteEntry(e) {
             fetch(`/api/v1/entries/${e.target.value}`, {
@@ -29,11 +30,9 @@ function Entries({ organismId }) {
         }
 
         function handleEditEntry() {
-            let editDate = Moment(entry.date).local().format('yyyy-MM-DThh:mm')
             setNoteToEdit(entry.note);
-            setDateToEdit(editDate);
+            setDateToEdit(entryDate);
             setEntryId(entry.id);
-            console.log(editDate, "date to edit before submit")
         }
 
         return (

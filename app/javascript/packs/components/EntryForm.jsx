@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Form, Button } from "semantic-ui-react";
+import { DateTime } from "luxon";
 
 function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit, dateToEdit, setDateToEdit, entryId }) {
-    const [newEntryNote, setNewEntryNote] = useState("");
-    const [newEntryDate, setNewEntryDate] = useState();
+    const [ newEntryNote, setNewEntryNote ] = useState("");
+    const [ newEntryDate, setNewEntryDate ] = useState(DateTime.now());
 
     function handleNewEntryNote(e) {
         setNewEntryNote(e.target.value);
     }
 
     function handleNewEntryDate(e) {
-        setNewEntryDate(e.target.value);
+        let newDate = DateTime.fromFormat(e.target.value, "yyyy-MM-dd'T'T")
+        setNewEntryDate(newDate);
     }
 
     function addNewNote(e) {
@@ -34,6 +36,8 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
             .then(result => setEntries([...entries, result]))
 
         e.target.reset();
+        setNewEntryNote("");
+        setNewEntryDate(DateTime.now());
     }
 
     function changeNote(e) {
@@ -42,7 +46,7 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
     }
 
     function changeDate(e) {
-        let newDate = e.target.value;
+        let newDate = DateTime.fromFormat(e.target.value, "yyyy-MM-dd'T'T")
         setDateToEdit(newDate);
     }
 
@@ -54,8 +58,6 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
             date: dateToEdit,
             organism_id: organismId
         }
-
-        console.log(editEntryObj, "edit entry obj in patch")
 
         fetch(`/api/v1/entries/${entryId}}`, {
             method: "PATCH",
@@ -72,7 +74,7 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
 
         e.target.reset();
         setNoteToEdit("");
-        setDateToEdit("");
+        setDateToEdit(DateTime.now());
     }
 
     return (
@@ -80,11 +82,11 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
             <Form onSubmit={addNewNote}>
                 <Form.Field>
                     <label>Note:</label>
-                    <Form.Input onChange={handleNewEntryNote} type="text" placeholder="What's going on with your plant today?"></Form.Input>
+                    <Form.Input value={newEntryNote} onChange={handleNewEntryNote} type="text" placeholder="What's going on with your plant today?"></Form.Input>
                 </Form.Field>
                 <Form.Field>
                     <label>Date:</label>
-                    <Form.Input onChange={handleNewEntryDate} type="datetime"></Form.Input>
+                    <Form.Input value={newEntryDate.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={handleNewEntryDate} type="datetime-local"></Form.Input>
                 </Form.Field>
                 <Button type="submit">Add new entry</Button>
             </Form>
@@ -95,7 +97,7 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
                 </Form.Field>
                 <Form.Field>
                     <label>Date:</label>
-                    <Form.Input value={dateToEdit} onChange={changeDate} type="datetime-local"></Form.Input>
+                    <Form.Input value={dateToEdit.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={changeDate} type="datetime-local"></Form.Input>
                 </Form.Field>
                 <Button type="submit">Edit your entry</Button>
             </Form>
