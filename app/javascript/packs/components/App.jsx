@@ -23,7 +23,7 @@ function App() {
         });
     }, []);
 
-    console.log("the user is currently logged", user ? "in" : "out")
+    // console.log("the user is currently logged", user ? "in" : "out")
 
     return (
         <React.Fragment>
@@ -33,7 +33,7 @@ function App() {
                 {user ? (
                         <Routes>
                             <Route path="/" element={<Garden organismId={organismId} setOrganismId={setOrganismId} user={user}/>} />
-                            <Route path="/entries" element={<Entries organismId={organismId}/>} />                            
+                            <Route path="/entries" element={<Entries organismId={organismId}/>} />                      
                         </Routes>
                 ) : (
                         <Routes>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card } from "semantic-ui-react";
+import { Button, Card, CardBody, CardTitle, CardText } from "reactstrap";
 
 function OrganismCard({ name, species, organismId, setOrganismId, organisms, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit }) {
 
@@ -26,15 +26,15 @@ function OrganismCard({ name, species, organismId, setOrganismId, organisms, set
     return (
         <React.Fragment>
             <Card>
-                <Card.Content>
-                    <Card.Header>{name}</Card.Header>
-                    <Card.Description>{species}</Card.Description>
+                <CardBody>
+                    <CardTitle>{name}</CardTitle>
+                    <CardText>{species}</CardText>
                     <Link to="/entries">
                         <Button value={organismId} onClick={handleEntryClick}>see entries</Button>
                     </Link>
                     <Button value={name} title={species} name={organismId} onClick={sendOrganismToEdit}>edit plant</Button>
                     <Button value={organismId} onClick={handleDeleteOrganism}>plant died :(</Button>
-                </Card.Content>
+                </CardBody>
             </Card>
         </React.Fragment>
     );

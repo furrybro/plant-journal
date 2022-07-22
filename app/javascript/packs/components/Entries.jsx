@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button } from "semantic-ui-react";
+import { Card, Button, CardTitle, CardText } from "reactstrap";
 import EntryForm from "./EntryForm";
 import { DateTime } from "luxon";
 
@@ -38,8 +38,8 @@ function Entries({ organismId }) {
         return (
             <React.Fragment>
                 <Card key={entry.id}>
-                    <Card.Header>{formatDate}</Card.Header>
-                    <Card.Description>{entry.note}</Card.Description>
+                    <CardTitle>{formatDate}</CardTitle>
+                    <CardText>{entry.note}</CardText>
                     <Button onClick={handleEditEntry}>edit</Button>
                     <Button value={entry.id} onClick={handleDeleteEntry}>delete</Button>
                 </Card>

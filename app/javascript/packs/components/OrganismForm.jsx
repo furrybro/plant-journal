@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, FormGroup, Input, Label } from "reactstrap";
 
 function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameToEdit, setOrganismNameToEdit, organismSpeciesToEdit, setOrganismSpeciesToEdit }) {
     const [ newOrganismName, setNewOrganismName ] = useState("");
@@ -74,25 +74,25 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
     return (
         <React.Fragment>
             <Form onSubmit={addNewOrganism}>
-                <Form.Field>
-                    <label>Plant Name:</label>
-                    <Form.Input onChange={handleNewOrgName} type="text" placeholder="What's your plant's name?"></Form.Input>
-                </Form.Field>
-                <Form.Field>
-                    <label>Species:</label>
-                    <Form.Input onChange={handleNewOrgSpecies} type="text" placeholder="What kind of plant is it?"></Form.Input>
-                </Form.Field>
+                <FormGroup>
+                    <Label>Plant Name:</Label>
+                    <Input onChange={handleNewOrgName} type="text" placeholder="What's your plant's name?"></Input>
+                </FormGroup>
+                <FormGroup>
+                    <Label>Species:</Label>
+                    <Input onChange={handleNewOrgSpecies} type="text" placeholder="What kind of plant is it?"></Input>
+                </FormGroup>
                 <Button type="submit">Add new plant</Button>
             </Form>
             <Form onSubmit={editOrganism}>
-                <Form.Field>
-                    <label>Plant Name:</label>
-                    <Form.Input value={organismNameToEdit} onChange={changeName} type="text" placeholder="Edit plant name"></Form.Input>
-                </Form.Field>
-                <Form.Field>
-                    <label>Species:</label>
-                    <Form.Input value={organismSpeciesToEdit} onChange={changeSpecies} type="text" placeholder="Edit plant species"></Form.Input>
-                </Form.Field>
+                <FormGroup>
+                    <Label>Plant Name:</Label>
+                    <Input value={organismNameToEdit} onChange={changeName} type="text" placeholder="Edit plant name"></Input>
+                </FormGroup>
+                <FormGroup>
+                    <Label>Species:</Label>
+                    <Input value={organismSpeciesToEdit} onChange={changeSpecies} type="text" placeholder="Edit plant species"></Input>
+                </FormGroup>
                 <Button type="submit">Edit your plant</Button>
             </Form>
         </React.Fragment>

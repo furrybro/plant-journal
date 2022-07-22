@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, FormGroup, Input, Label } from "reactstrap";
 import { DateTime } from "luxon";
 
 function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit, dateToEdit, setDateToEdit, entryId }) {
@@ -80,25 +80,25 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
     return (
         <React.Fragment>
             <Form onSubmit={addNewNote}>
-                <Form.Field>
-                    <label>Note:</label>
-                    <Form.Input value={newEntryNote} onChange={handleNewEntryNote} type="text" placeholder="What's going on with your plant today?"></Form.Input>
-                </Form.Field>
-                <Form.Field>
-                    <label>Date:</label>
-                    <Form.Input value={newEntryDate.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={handleNewEntryDate} type="datetime-local"></Form.Input>
-                </Form.Field>
+                <FormGroup>
+                    <Label>Note:</Label>
+                    <Input value={newEntryNote} onChange={handleNewEntryNote} type="text" placeholder="What's going on with your plant today?"></Input>
+                </FormGroup>
+                <FormGroup>
+                    <Label>Date:</Label>
+                    <Input value={newEntryDate.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={handleNewEntryDate} type="datetime-local"></Input>
+                </FormGroup>
                 <Button type="submit">Add new entry</Button>
             </Form>
             <Form onSubmit={editEntry}>
-                <Form.Field>
-                    <label>Note:</label>
-                    <Form.Input value={noteToEdit} onChange={changeNote} type="text" placeholder="Edit note here"></Form.Input>
-                </Form.Field>
-                <Form.Field>
-                    <label>Date:</label>
-                    <Form.Input value={dateToEdit.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={changeDate} type="datetime-local"></Form.Input>
-                </Form.Field>
+                <FormGroup>
+                    <Label>Note:</Label>
+                    <Input value={noteToEdit} onChange={changeNote} type="text" placeholder="Edit note here"></Input>
+                </FormGroup>
+                <FormGroup>
+                    <Label>Date:</Label>
+                    <Input value={dateToEdit.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={changeDate} type="datetime-local"></Input>
+                </FormGroup>
                 <Button type="submit">Edit your entry</Button>
             </Form>
         </React.Fragment>
