@@ -33,21 +33,21 @@ function SignUp({ setUser }) {
 
 	return (
 		<div className="formdiv">
-			<h2>Sign Up</h2>
 			<Form className="form" onSubmit={handleSubmit}>
+				<h2 className="header">SIGN UP</h2>
 				<FormGroup>
-					<Label htmlFor="newusername">Username</Label>
+					<Label htmlFor="newusername">Username:</Label>
 					<Input
 						type="text"
 						// name="username"
 						id="newusername"
 						value={username}
-						placeholder="example123"
+						placeholder="gardener4eva"
 						onChange={(e) => setUsername(e.target.value)}
 					/>
 				</FormGroup>
 				<FormGroup>
-					<Label htmlFor="newemail">Email</Label>
+					<Label htmlFor="newemail">Email:</Label>
 					<Input
 						type="email"
 						// name="email"
@@ -58,7 +58,7 @@ function SignUp({ setUser }) {
 					/>
 				</FormGroup>
 				<FormGroup>
-					<Label htmlFor="password">Password</Label>
+					<Label htmlFor="password">Password:</Label>
 					<Input
 						type="password"
 						// name="newpassword"
@@ -69,7 +69,7 @@ function SignUp({ setUser }) {
 					/>
 				</FormGroup>
 				<FormGroup>
-					<Label htmlFor="password_confirmation">Confirm Password</Label>
+					<Label htmlFor="password_confirmation">Confirm Password:</Label>
 					<Input
 						type="password"
 						// name="password"
@@ -80,6 +80,7 @@ function SignUp({ setUser }) {
 					/>
 				</FormGroup>
 				<Button>Submit</Button>
+				<br></br>
 				<br></br>
                 <FormText>
                     Already have an account? <a href="/login">Login here.</a>

@@ -25,10 +25,10 @@ function Login({ setUser }) {
 
     return (
         <div className="formdiv">
-            <h1>Login</h1>
             <Form className="form" onSubmit={handleSubmit}>
+                <h1 className="header">LOGIN</h1>
                 <FormGroup>
-                    <Label htmlFor="username">Username</Label>
+                    <Label htmlFor="username">Username:</Label>
                     <Input
                         type="text"
                         id="username"
@@ -38,7 +38,7 @@ function Login({ setUser }) {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Password:</Label>
                     <Input
                         type="password"
                         id="password"
@@ -48,6 +48,7 @@ function Login({ setUser }) {
                     />
                 </FormGroup>
                 <Button type="submit">Login</Button>
+                <br></br>
                 <br></br>
                 <FormText>
                     New to us? <a href="/signup">Sign up here.</a>

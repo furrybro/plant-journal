@@ -60,10 +60,19 @@
     background-color: rgba(176, 202, 148, 0.958);
   }
   
-  .form {
+.form {
     padding: 1em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
   }
   
-  label {
+label {
     font-weight: 600;
+  }
+
+.header {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    text-align: center;
   }
