@@ -7,8 +7,9 @@ import NavBar from "./NavBar";
 import Entries from "./Entries";
 
 function App() {
-    const [user, setUser] = useState(null);
-    const [organismId, setOrganismId] = useState();
+    const [ user, setUser ] = useState(null);
+    const [ organismId, setOrganismId ] = useState();
+    const [ entryForm, setEntryForm ] = useState(false);
 
     useEffect(() => {
         fetch("/api/v1/me", {
@@ -36,14 +37,14 @@ function App() {
                         {user ? (
                             <Routes>
                                 <Route path="/" element={<Garden organismId={organismId} setOrganismId={setOrganismId} user={user} />} />
-                                <Route path="/entries" element={<Entries organismId={organismId} />} />
+                                <Route path="/entries" element={<Entries organismId={organismId} entryForm={entryForm} setEntryForm={setEntryForm} />} />
                             </Routes>
                         ) : (
                             <Routes>
                                 <Route path="/" element={<Login setUser={setUser} />} />
                                 <Route path="/signup" element={<SignUp setUser={setUser} />} />
                                 <Route path="/login" element={<Login setUser={setUser} />} />
-                                <Route path="/entries" element={<Entries organismId={organismId} />} />
+                                <Route path="/entries" element={<Entries organismId={organismId} entryForm={entryForm} setEntryForm={setEntryForm}/>} />
                             </Routes>
                         )}
                     </main>

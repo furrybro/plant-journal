@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, FormGroup, Input, Label } from "reactstrap";
 import { DateTime } from "luxon";
 
-function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit, dateToEdit, setDateToEdit, entryId }) {
+function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit, dateToEdit, setDateToEdit, entryId, entryForm, setEntryForm }) {
     const [ newEntryNote, setNewEntryNote ] = useState("");
     const [ newEntryDate, setNewEntryDate ] = useState(DateTime.now());
 
@@ -67,40 +67,51 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
             },
             body: JSON.stringify(editEntryObj)
         })
-        .then(result => result.json())
-        .then(() => fetch(`/api/v1/entries/${organismId}`))
-        .then(result => result.json())
-        .then(result => setEntries(result));
+            .then(result => result.json())
+            .then(() => fetch(`/api/v1/entries/${organismId}`))
+            .then(result => result.json())
+            .then(result => setEntries(result));
 
         e.target.reset();
         setNoteToEdit("");
         setDateToEdit(DateTime.now());
+        setEntryForm(false);
     }
 
     return (
         <React.Fragment>
-            <Form onSubmit={addNewNote}>
-                <FormGroup>
-                    <Label>Note:</Label>
-                    <Input value={newEntryNote} onChange={handleNewEntryNote} type="text" placeholder="What's going on with your plant today?"></Input>
-                </FormGroup>
-                <FormGroup>
-                    <Label>Date:</Label>
-                    <Input value={newEntryDate.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={handleNewEntryDate} type="datetime-local"></Input>
-                </FormGroup>
-                <Button type="submit">Add new entry</Button>
-            </Form>
-            <Form onSubmit={editEntry}>
-                <FormGroup>
-                    <Label>Note:</Label>
-                    <Input value={noteToEdit} onChange={changeNote} type="text" placeholder="Edit note here"></Input>
-                </FormGroup>
-                <FormGroup>
-                    <Label>Date:</Label>
-                    <Input value={dateToEdit.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={changeDate} type="datetime-local"></Input>
-                </FormGroup>
-                <Button type="submit">Edit your entry</Button>
-            </Form>
+            <div className="entryformdiv">
+                <div className="newentryform">
+                    <Form onSubmit={addNewNote}>
+                        <FormGroup>
+                            <Label>Note:</Label>
+                            <Input value={newEntryNote} onChange={handleNewEntryNote} type="text" placeholder="What's going on with your plant today?"></Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Date:</Label>
+                            <Input value={newEntryDate.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={handleNewEntryDate} type="datetime-local"></Input>
+                        </FormGroup>
+                        <Button type="submit">Add new entry</Button>
+                    </Form>
+                </div>
+                {entryForm ? (
+                    <div className="editentryform">
+                        <Form onSubmit={editEntry}>
+                            <FormGroup>
+                                <Label>Note:</Label>
+                                <Input value={noteToEdit} onChange={changeNote} type="text" placeholder="Edit note here"></Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Date:</Label>
+                                <Input value={dateToEdit.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={changeDate} type="datetime-local"></Input>
+                            </FormGroup>
+                            <Button type="submit">Edit your entry</Button>
+                        </Form>
+                    </div>
+                ) : (
+                    null
+                )}
+            </div>
         </React.Fragment>
     );
 }

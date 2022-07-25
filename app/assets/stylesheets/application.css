@@ -122,3 +122,21 @@ label {
    width: 400px;    
    background-color: rgba(176, 202, 148, 0.958);
 }
+
+.entryformdiv {
+   border: 2px solid #d3d3d3;
+   border-radius: .5em;
+   margin-top: 50px;
+   padding: 1em;
+   text-align: left;
+   width: 400px;    
+   background-color: rgba(176, 202, 148, 0.958);
+}
+
+.newentryform {
+
+}
+
+.editentryform {
+
+}
