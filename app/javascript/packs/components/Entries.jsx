@@ -39,10 +39,10 @@ function Entries({ organismId, entryForm, setEntryForm }) {
         return (
             <React.Fragment>
                 <Card key={entry.id}>
-                    <CardTitle tag="h5">{formatDate}</CardTitle>
-                    <CardSubtitle tag="h6">{entry.note}</CardSubtitle>
-                    <Button onClick={handleEditEntry}>edit name</Button>
-                    <Button value={entry.id} onClick={handleDeleteEntry}>delete</Button>
+                    <CardTitle tag="h5">{entry.note}</CardTitle>
+                    <CardSubtitle tag="h6">{formatDate}</CardSubtitle>
+                    <Button onClick={handleEditEntry}>edit entry</Button>
+                    <Button value={entry.id} onClick={handleDeleteEntry}>delete entry</Button>
                 </Card>
             </React.Fragment>
         );
