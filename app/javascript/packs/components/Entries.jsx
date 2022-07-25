@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, CardTitle, CardText } from "reactstrap";
+import { Card, Button, CardTitle, CardText, CardGroup, CardSubtitle } from "reactstrap";
 import EntryForm from "./EntryForm";
 import { DateTime } from "luxon";
 
 
 function Entries({ organismId }) {
-    const [ entries, setEntries ] = useState([]);
-    const [ noteToEdit, setNoteToEdit ] = useState("");
-    const [ dateToEdit, setDateToEdit ] = useState(DateTime.now());
-    const [ entryId, setEntryId ] = useState();
+    const [entries, setEntries] = useState([]);
+    const [noteToEdit, setNoteToEdit] = useState("");
+    const [dateToEdit, setDateToEdit] = useState(DateTime.now());
+    const [entryId, setEntryId] = useState();
 
     useEffect(() => {
         fetch(`/api/v1/entries/${organismId}`)
@@ -24,9 +24,9 @@ function Entries({ organismId }) {
             fetch(`/api/v1/entries/${e.target.value}`, {
                 method: "DELETE"
             })
-            .then(() => fetch(`/api/v1/entries/${organismId}`))
-            .then(result => result.json())
-            .then(result => setEntries(result));
+                .then(() => fetch(`/api/v1/entries/${organismId}`))
+                .then(result => result.json())
+                .then(result => setEntries(result));
         }
 
         function handleEditEntry() {
@@ -38,9 +38,9 @@ function Entries({ organismId }) {
         return (
             <React.Fragment>
                 <Card key={entry.id}>
-                    <CardTitle>{formatDate}</CardTitle>
-                    <CardText>{entry.note}</CardText>
-                    <Button onClick={handleEditEntry}>edit</Button>
+                    <CardTitle tag="h5">{formatDate}</CardTitle>
+                    <CardSubtitle tag="h6">{entry.note}</CardSubtitle>
+                    <Button onClick={handleEditEntry}>edit name</Button>
                     <Button value={entry.id} onClick={handleDeleteEntry}>delete</Button>
                 </Card>
             </React.Fragment>
@@ -50,8 +50,10 @@ function Entries({ organismId }) {
     return (
         <React.Fragment>
             <h1>Entries</h1>
-            {renderEachEntry}
-            <EntryForm organismId={organismId} entries={entries} setEntries={setEntries} noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} dateToEdit={dateToEdit} setDateToEdit={setDateToEdit} entryId={entryId}/>
+            <CardGroup>
+                {renderEachEntry}
+            </CardGroup>
+            <EntryForm organismId={organismId} entries={entries} setEntries={setEntries} noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} dateToEdit={dateToEdit} setDateToEdit={setDateToEdit} entryId={entryId} />
         </React.Fragment>
     );
 }
