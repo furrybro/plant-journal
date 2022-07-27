@@ -49,6 +49,8 @@ gem "webpacker"
 
 gem "active_model_serializers"
 
+gem "aws-sdk-s3", require: false
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
