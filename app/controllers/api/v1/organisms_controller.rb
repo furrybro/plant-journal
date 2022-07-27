@@ -41,6 +41,6 @@ class Api::V1::OrganismsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def organism_params
-      params.permit(:name, :species, :user_id)
+      params.permit(:name, :species, :user_id, :featured_image)
     end
 end

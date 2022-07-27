@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, CardBody, CardTitle, Col, Row, CardText, CardSubtitle, CardImg } from "reactstrap";
 
-function OrganismCard({ name, species, organismId, setOrganismId, organisms, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm }) {
+function OrganismCard({ user, name, species, image, organism, organismId, setOrganismId, organisms, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm }) {
 
     function handleEntryClick(e) {
         setOrganismId(e.target.value);
@@ -12,7 +12,7 @@ function OrganismCard({ name, species, organismId, setOrganismId, organisms, set
         fetch(`/api/v1/organisms/${e.target.value}`, {
             method: "DELETE"
         })
-            .then(() => fetch(`/api/v1/organisms`))
+            .then(() => fetch(`/api/v1/organisms/${user.id}`))
             .then(result => result.json())
             .then(result => setOrganisms(result));
     }
@@ -24,13 +24,17 @@ function OrganismCard({ name, species, organismId, setOrganismId, organisms, set
         setOrganismForm(true);
     }
 
+    console.log(organism, "organism")
+    console.log(image, "image")
+    // console.log(image.url, "image url")
+
     return (
         <React.Fragment>
             <Col>
                 <Card className="orgcard" style={{width: "18rem"}}>
                     <CardImg
-                        alt="cactus image placeholder"
-                        src="https://www.thespruce.com/thmb/DU6yHor9U1YhA45DEFUqACZmw3o=/3450x2300/filters:no_upscale():max_bytes(150000):strip_icc()/kararileyzebra-4-49cac0d8528c425fafbe1ab4792c991c.jpg"
+                        // alt="cactus image placeholder"
+                        src={image !== undefined ? image : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"}
                         top
                         // style={{
                         //     height: 200

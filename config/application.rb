@@ -18,5 +18,9 @@ module PlantJournal
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Prioritizes other routes (ie, activestorage routes) over app routes
+    # Without this, the wildcard path eats activestorage
+    config.railties_order = [:all, :main_app]
   end
 end

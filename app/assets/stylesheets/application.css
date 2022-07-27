@@ -94,13 +94,13 @@ label {
    position: sticky;
 }
 
-.orgcard {
+/* .orgcard {
    flex-grow: 1;
    flex-basis: 16%;
    display: flex;
    position: absolute;
    top: 180px;
-}
+} */
 
 .neworgform {
 

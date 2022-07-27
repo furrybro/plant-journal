@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Form, Button, FormGroup, Input, Label } from "reactstrap";
 
 function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameToEdit, setOrganismNameToEdit, organismSpeciesToEdit, setOrganismSpeciesToEdit, organismForm, setOrganismForm }) {
-    const [newOrganismName, setNewOrganismName] = useState("");
-    const [newOrganismSpecies, setNewOrganismSpecies] = useState("");
+    const [ newOrganismName, setNewOrganismName ] = useState("");
+    const [ newOrganismSpecies, setNewOrganismSpecies ] = useState("");
+    const [ newOrganismPhoto, setNewOrganismPhoto ] = useState(null);
 
     function handleNewOrgName(e) {
         setNewOrganismName(e.target.value);
@@ -13,24 +14,39 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
         setNewOrganismSpecies(e.target.value);
     }
 
+    function handleNewOrgPhoto(e) {
+        setNewOrganismPhoto(e.target.files[0]);
+    }
+
+
     function addNewOrganism(e) {
         e.preventDefault();
 
-        let newOrganismObj = {
-            name: newOrganismName,
-            species: newOrganismSpecies,
-            user_id: user.id,
-        }
+        // let newOrganismObj = {
+        //     name: newOrganismName,
+        //     species: newOrganismSpecies,
+        //     user_id: user.id,
+        //     featured_image: newOrganismPhoto
+        // }
+
+        const formData = new FormData();
+        formData.append('name', newOrganismName);
+        formData.append('species', newOrganismSpecies);
+        formData.append('user_id', user.id);
+        formData.append('featured_image', newOrganismPhoto);
 
         fetch("/api/v1/organisms", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newOrganismObj)
+            // headers: {
+            //     "Content-Type": "application/json",
+            // },
+            body: formData
         })
-            .then(result => result.json())
-            .then(result => setOrganisms([...organisms, result]));
+        // .catch(error => console.log(error))
+        .then(result => result.json())
+        .then(() => fetch(`/api/v1/organisms/${user.id}`))
+        .then(result => result.json())
+        .then(result => setOrganisms(result));
 
         e.target.reset();
     }
@@ -84,6 +100,10 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
                         <FormGroup>
                             <Label>Species:</Label>
                             <Input onChange={handleNewOrgSpecies} type="text" placeholder="What kind of plant is it?"></Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Photo:</Label>
+                            <Input onChange={handleNewOrgPhoto} type="file" accept="image/*" placeholder="Upload photo here"></Input>
                         </FormGroup>
                         <Button type="submit">Add new plant</Button>
                     </Form>
