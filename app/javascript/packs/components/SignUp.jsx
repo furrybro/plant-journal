@@ -4,14 +4,12 @@ import { Button, Form, FormGroup, Input, Label, FormText } from "reactstrap";
 
 
 function SignUp({ setUser }) {
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [passwordConfirmation, setPasswordConfirmation] = useState("");
+	const [ username, setUsername ] = useState("");
+	const [ email, setEmail ] = useState("");
+	const [ password, setPassword ] = useState("");
+	const [ passwordConfirmation, setPasswordConfirmation ] = useState("");
 
 	function handleSubmit(e) {
-
-		console.log(username, email, password, passwordConfirmation, "hopefull ythis works")
 		e.preventDefault();
 		fetch("/api/v1/signup", {
 			method: "POST",

@@ -24,10 +24,6 @@ function OrganismCard({ user, name, species, image, organism, organismId, setOrg
         setOrganismForm(true);
     }
 
-    console.log(organism, "organism")
-    console.log(image, "image")
-    // console.log(image.url, "image url")
-
     return (
         <React.Fragment>
             <Col>

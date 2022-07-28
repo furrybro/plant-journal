@@ -12,7 +12,7 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
     }
 
     function handleNewEntryDate(e) {
-        let newDate = DateTime.fromFormat(e.target.value, "yyyy-MM-dd'T'T")
+        let newDate = DateTime.fromFormat(e.target.value, "yyyy-MM-dd'T'T");
         setNewEntryDate(newDate);
     }
 

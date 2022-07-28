@@ -4,8 +4,8 @@ import { Button, Form, FormGroup, Input, Label, FormText } from "reactstrap";
 
 
 function Login({ setUser }) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [ username, setUsername ] = useState("");
+    const [ password, setPassword ] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();

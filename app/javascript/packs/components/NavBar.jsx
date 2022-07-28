@@ -4,7 +4,7 @@ import { Button, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Nav
 
 
 function NavBar({ user, setUser }) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [ isOpen, setIsOpen ] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
 

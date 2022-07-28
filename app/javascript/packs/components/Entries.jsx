@@ -5,10 +5,10 @@ import { DateTime } from "luxon";
 
 
 function Entries({ organismId, entryForm, setEntryForm }) {
-    const [entries, setEntries] = useState([]);
-    const [noteToEdit, setNoteToEdit] = useState("");
-    const [dateToEdit, setDateToEdit] = useState(DateTime.now());
-    const [entryId, setEntryId] = useState();
+    const [ entries, setEntries ] = useState([]);
+    const [ noteToEdit, setNoteToEdit ] = useState("");
+    const [ dateToEdit, setDateToEdit ] = useState(DateTime.now());
+    const [ entryId, setEntryId ] = useState();
 
     useEffect(() => {
         fetch(`/api/v1/entries/${organismId}`)
@@ -17,8 +17,8 @@ function Entries({ organismId, entryForm, setEntryForm }) {
     }, []);
 
     const renderEachEntry = entries.map((entry) => {
-        let entryDate = DateTime.fromISO(entry.date)
-        let formatDate = entryDate.toLocaleString(DateTime.DATETIME_FULL)
+        let entryDate = DateTime.fromISO(entry.date);
+        let formatDate = entryDate.toLocaleString(DateTime.DATETIME_FULL);
 
         function handleDeleteEntry(e) {
             fetch(`/api/v1/entries/${e.target.value}`, {
