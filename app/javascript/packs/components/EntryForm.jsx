@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit, dateToEdit, setDateToEdit, entryId, entryForm, setEntryForm }) {
     const [ newEntryNote, setNewEntryNote ] = useState("");
     const [ newEntryDate, setNewEntryDate ] = useState(DateTime.now());
+    const [ newEntryPhoto, setNewEntryPhoto ] = useState(null);
 
     function handleNewEntryNote(e) {
         setNewEntryNote(e.target.value);
@@ -15,25 +16,37 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
         setNewEntryDate(newDate);
     }
 
+    function handleNewEntryPhoto(e) {
+        setNewEntryPhoto(e.target.files[0]);
+    }
+
     function addNewNote(e) {
         e.preventDefault();
 
-        let newEntryObj = {
-            note: newEntryNote,
-            date: newEntryDate,
-            organism_id: organismId
-        };
+        // let newEntryObj = {
+        //     note: newEntryNote,
+        //     date: newEntryDate,
+        //     organism_id: organismId
+        // };
+
+        const formData = new FormData();
+        formData.append('note', newEntryNote);
+        formData.append('date', newEntryDate);
+        formData.append('organism_id', organismId);
+        formData.append('entry_image', newEntryPhoto);
 
         fetch(`/api/v1/entries/`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json",
-            },
-            body: JSON.stringify(newEntryObj)
+            // headers: {
+            //     "Content-Type": "application/json",
+            //     "Accepts": "application/json",
+            // },
+            body: formData
         })
             .then(result => result.json())
-            .then(result => setEntries([...entries, result]))
+            .then(() => fetch(`/api/v1/entries/${organismId}`))
+            .then(result => result.json())
+            .then(result => setEntries(result));
 
         e.target.reset();
         setNewEntryNote("");
@@ -90,6 +103,10 @@ function EntryForm({ organismId, entries, setEntries, noteToEdit, setNoteToEdit,
                         <FormGroup>
                             <Label>Date:</Label>
                             <Input value={newEntryDate.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={handleNewEntryDate} type="datetime-local"></Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Photo:</Label>
+                            <Input onChange={handleNewEntryPhoto} type="file" accept="image/*" placeholder="Upload photo here"></Input>
                         </FormGroup>
                         <Button type="submit">Add new entry</Button>
                     </Form>

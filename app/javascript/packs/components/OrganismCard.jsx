@@ -33,7 +33,7 @@ function OrganismCard({ user, name, species, image, organism, organismId, setOrg
             <Col>
                 <Card className="orgcard" style={{width: "18rem"}}>
                     <CardImg
-                        // alt="cactus image placeholder"
+                        alt="organism image placeholder"
                         src={image !== undefined ? image : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"}
                         top
                         // style={{

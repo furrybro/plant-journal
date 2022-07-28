@@ -41,6 +41,6 @@ class Api::V1::EntriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def entry_params
-      params.permit(:note, :date, :organism_id)
+      params.permit(:note, :date, :organism_id, :entry_image)
     end
 end

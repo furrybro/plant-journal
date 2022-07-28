@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, CardTitle, CardText, CardGroup, CardSubtitle } from "reactstrap";
+import { Card, Button, CardTitle, CardText, CardGroup, CardSubtitl, CardImg, CardSubtitle, CardBody } from "reactstrap";
 import EntryForm from "./EntryForm";
 import { DateTime } from "luxon";
 
 
 function Entries({ organismId, entryForm, setEntryForm }) {
-    const [ entries, setEntries ] = useState([]);
-    const [ noteToEdit, setNoteToEdit ] = useState("");
-    const [ dateToEdit, setDateToEdit ] = useState(DateTime.now());
-    const [ entryId, setEntryId ] = useState();
+    const [entries, setEntries] = useState([]);
+    const [noteToEdit, setNoteToEdit] = useState("");
+    const [dateToEdit, setDateToEdit] = useState(DateTime.now());
+    const [entryId, setEntryId] = useState();
 
     useEffect(() => {
         fetch(`/api/v1/entries/${organismId}`)
@@ -36,16 +36,45 @@ function Entries({ organismId, entryForm, setEntryForm }) {
             setEntryForm(true);
         }
 
-        return (
-            <React.Fragment>
-                <Card key={entry.id}>
-                    <CardTitle tag="h5">{entry.note}</CardTitle>
-                    <CardSubtitle tag="h6">{formatDate}</CardSubtitle>
-                    <Button onClick={handleEditEntry}>edit entry</Button>
-                    <Button value={entry.id} onClick={handleDeleteEntry}>delete entry</Button>
-                </Card>
-            </React.Fragment>
-        );
+        if (entry.entry_image === null) {
+            return (
+                <React.Fragment>
+                    <Card key={entry.id}>
+                        <CardImg
+                            alt="entry image placeholder"
+                            src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"
+                            top
+                            width="100%"
+                        />
+                        <CardBody>
+                            <CardTitle tag="h5">{entry.note}</CardTitle>
+                            <CardSubtitle tag="h6">{formatDate}</CardSubtitle>
+                            <Button onClick={handleEditEntry}>edit entry</Button>
+                            <Button value={entry.id} onClick={handleDeleteEntry}>delete entry</Button>
+                        </CardBody>
+                    </Card>
+                </React.Fragment>
+            );
+        } else {
+            return (
+                <React.Fragment>
+                    <Card key={entry.id}>
+                        <CardImg
+                            alt="entry image placeholder"
+                            src={entry.entry_image.url !== undefined ? entry.entry_image.url : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"}
+                            top
+                            width="100%"
+                        />
+                        <CardBody>
+                            <CardTitle tag="h5">{entry.note}</CardTitle>
+                            <CardSubtitle tag="h6">{formatDate}</CardSubtitle>
+                            <Button onClick={handleEditEntry}>edit entry</Button>
+                            <Button value={entry.id} onClick={handleDeleteEntry}>delete entry</Button>
+                        </CardBody>
+                    </Card>
+                </React.Fragment>
+            );
+        }
     });
 
     return (
