@@ -17,43 +17,6 @@
     font-family: 'Poppins', sans-serif;
  }
 
- .succulent {
-    /* background-image: url("../images/succulent.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    height: 100%; */
-    position: relative; 
-    height: 150vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    background-image: url('../images/succulent.jpeg');
-    background-size: cover;
-    background-position: center;
- }
-
- /* .succulent::before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    min-width: 50%;
-    min-height: 50%;
-    opacity: 0.75;
-    background-color: rgba(0,0,0,0.25);
- } */
-
- .navbar {
-    background-color: rgba(176, 202, 148);
-    position: sticky;
-    top: 0;
-    width: 100%;
- }
-
  .formdiv {
     border: 2px solid #d3d3d3;
     border-radius: .5em;
@@ -102,14 +65,6 @@ label {
    top: 180px;
 } */
 
-.neworgform {
-
-}
-
-.editorgform {
-
-}
-
 .orgformdiv {
    border: 2px solid #d3d3d3;
    border-radius: .5em;
@@ -131,12 +86,4 @@ label {
    text-align: left;
    width: 400px;    
    background-color: rgba(176, 202, 148, 0.958);
-}
-
-.newentryform {
-
-}
-
-.editentryform {
-
 }

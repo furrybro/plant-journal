@@ -16,7 +16,7 @@ function Organisms({ user, organisms, setOrganisms, setOrganismId, setOrganismNa
     const columnsPerRow = 6;
 
     return (
-        <Container className="container">
+        <Container>
             <Row >
                 {renderEachOrganism}
             </Row >

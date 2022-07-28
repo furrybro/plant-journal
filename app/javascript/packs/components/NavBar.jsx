@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText } from "reactstrap";
+import { Container, Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from "reactstrap";
 
 
 function NavBar({ user, setUser }) {
-    const [ isOpen, setIsOpen ] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
 
@@ -19,13 +19,13 @@ function NavBar({ user, setUser }) {
     return (
         <div>
             {user ? (
-                <Navbar>
-                    <NavbarBrand>Welcome!</NavbarBrand>
+                <Navbar className="navbar sticky-top d-flex flex-row" style={{ backgroundColor: 'rgba(176, 202, 148)' }}>
+                    <NavbarBrand>THE PLANT JOURNAL</NavbarBrand>
                     <Nav>
-                        <NavItem>
+                        <NavItem style={{ fontSize: '18px' }}>
                             <NavLink href="/">Garden</NavLink>
                         </NavItem>
-                        <NavItem>
+                        <NavItem style={{ fontSize: '18px' }}>
                             <NavLink onClick={handleLogoutClick}>Logout</NavLink>
                         </NavItem>
                     </Nav>
@@ -38,18 +38,3 @@ function NavBar({ user, setUser }) {
 }
 
 export default NavBar;
-
-
-// {user ? (
-//                 <React.Fragment>
-//                     <Link to="/">Garden</Link>
-//                     <button onClick={handleLogoutClick}>Logout</button>
-//                 </React.Fragment>
-//             ) : (
-//                 null
-//                 // <React.Fragment>
-//                 //     <Link to="/signup">Signup</Link><br>
-//                 //     </br>
-//                 //     <Link to="/login">Login</Link>
-//                 // </React.Fragment>
-//             )}

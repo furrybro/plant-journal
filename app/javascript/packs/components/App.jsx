@@ -5,6 +5,8 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 import NavBar from "./NavBar";
 import Entries from "./Entries";
+import { Container } from "reactstrap";
+import succulent from "/app/assets/images/succulent";
 
 function App() {
     const [ user, setUser ] = useState(null);
@@ -30,9 +32,8 @@ function App() {
     return (
         <React.Fragment>
             <NavBar user={user} setUser={setUser} />
-            <div className="succulent">
+            <div className="bg-image d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${succulent})`, height: '100vh', backgroundSize: 'cover' }}>
                 <BrowserRouter>
-
                     <main>
                         {user ? (
                             <Routes>
