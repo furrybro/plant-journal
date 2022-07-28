@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Input, Label, FormText } from "reactstrap";
-import "/Users/jeena/Development/code/phase-5/plant-journal/app/assets/stylesheets/application.css";
+//import "/Users/jeena/Development/code/phase-5/plant-journal/app/assets/stylesheets/application.css";
 
 
 function Login({ setUser }) {
