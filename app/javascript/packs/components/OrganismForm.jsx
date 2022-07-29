@@ -22,13 +22,6 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
     function addNewOrganism(e) {
         e.preventDefault();
 
-        // let newOrganismObj = {
-        //     name: newOrganismName,
-        //     species: newOrganismSpecies,
-        //     user_id: user.id,
-        //     featured_image: newOrganismPhoto
-        // }
-
         const formData = new FormData();
         formData.append('name', newOrganismName);
         formData.append('species', newOrganismSpecies);
@@ -37,12 +30,8 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
 
         fetch("/api/v1/organisms", {
             method: "POST",
-            // headers: {
-            //     "Content-Type": "application/json",
-            // },
             body: formData
         })
-        // .catch(error => console.log(error))
         .then(result => result.json())
         .then(() => fetch(`/api/v1/organisms/${user.id}`))
         .then(result => result.json())

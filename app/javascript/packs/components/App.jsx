@@ -30,9 +30,9 @@ function App() {
     // console.log("the user is currently logged", user ? "in" : "out")
 
     return (
-        <React.Fragment>
-            <NavBar user={user} setUser={setUser} />
-            <div className="bg-image d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${succulent})`, height: '100vh', backgroundSize: 'cover' }}>
+        <div className="bg-image d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${succulent})`, height:'100vh', backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+                <NavBar user={user} setUser={setUser} />
+            <div style={{ position: 'static', maxHeight: '80vh', overflow: 'auto' }}>
                 <BrowserRouter>
                     <main>
                         {user ? (
@@ -51,7 +51,7 @@ function App() {
                     </main>
                 </BrowserRouter>
             </div>
-        </React.Fragment>
+        </div>
 
 
     );

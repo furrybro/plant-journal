@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from "reactstrap";
+import { Container, Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarText, Button } from "reactstrap";
 
 
 function NavBar({ user, setUser }) {
@@ -17,23 +17,25 @@ function NavBar({ user, setUser }) {
     }
 
     return (
-        <div>
+        <Nav className="navbar fixed-top" style={{ backgroundColor: 'rgba(176, 202, 148)' }}>
             {user ? (
-                <Navbar className="navbar sticky-top d-flex flex-row" style={{ backgroundColor: 'rgba(176, 202, 148)' }}>
-                    <NavbarBrand>THE PLANT JOURNAL</NavbarBrand>
-                    <Nav>
-                        <NavItem style={{ fontSize: '18px' }}>
-                            <NavLink href="/">Garden</NavLink>
-                        </NavItem>
-                        <NavItem style={{ fontSize: '18px' }}>
-                            <NavLink onClick={handleLogoutClick}>Logout</NavLink>
-                        </NavItem>
-                    </Nav>
-                </Navbar>
+                <Container fluid>
+                    {/* <Navbar> */}
+                        <NavbarBrand>THE PLANT JOURNAL</NavbarBrand>
+                        {/* <Nav> */}
+                            <NavItem className="me-right" style={{ fontSize: '18px' }}>
+                                <NavLink href="/">Garden</NavLink>
+                            </NavItem>
+                            <NavItem className="me-right" style={{ fontSize: '18px' }}>
+                                <NavLink onClick={handleLogoutClick}>Logout</NavLink>
+                            </NavItem>
+                        {/* </Nav> */}
+                    {/* </Navbar> */}
+                </Container>
             ) : (
                 null
             )}
-        </div>
+        </Nav>
     );
 }
 
