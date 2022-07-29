@@ -17,9 +17,9 @@ function Garden({ organismId, setOrganismId, user }) {
     return (
         <div >
             <div className="d-flex">
-                <Organisms user={user} organisms={organisms} setOrganisms={setOrganisms} setOrganismId={setOrganismId} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm} />
+                <Organisms user={user} organisms={organisms} setOrganisms={setOrganisms} setOrganismId={setOrganismId} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm}/>
             </div>
-            <OrganismForm user={user} organisms={organisms} setOrganisms={setOrganisms} organismId={organismId} organismNameToEdit={organismNameToEdit} setOrganismNameToEdit={setOrganismNameToEdit} organismSpeciesToEdit={organismSpeciesToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} organismForm={organismForm} setOrganismForm={setOrganismForm} />
+            <OrganismForm user={user} organisms={organisms} setOrganisms={setOrganisms} organismId={organismId} organismNameToEdit={organismNameToEdit} setOrganismNameToEdit={setOrganismNameToEdit} organismSpeciesToEdit={organismSpeciesToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} organismForm={organismForm} setOrganismForm={setOrganismForm}/>
         </div>
     );
 }

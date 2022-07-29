@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { Form, Button, FormGroup, Input, Label } from "reactstrap";
+import { Form, Button, FormGroup, Input, Label, Modal } from "reactstrap";
 
 function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameToEdit, setOrganismNameToEdit, organismSpeciesToEdit, setOrganismSpeciesToEdit, organismForm, setOrganismForm }) {
-    const [ newOrganismName, setNewOrganismName ] = useState("");
-    const [ newOrganismSpecies, setNewOrganismSpecies ] = useState("");
-    const [ newOrganismPhoto, setNewOrganismPhoto ] = useState(null);
+    const [newOrganismName, setNewOrganismName] = useState("");
+    const [newOrganismSpecies, setNewOrganismSpecies] = useState("");
+    const [newOrganismPhoto, setNewOrganismPhoto] = useState(null);
+    const [modal, setModal] = useState(false);
+
+    const toggle = () => setModal(!modal);
+    const editToggle = () => setOrganismForm(!organismForm);
 
     function handleNewOrgName(e) {
         setNewOrganismName(e.target.value);
@@ -17,7 +21,6 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
     function handleNewOrgPhoto(e) {
         setNewOrganismPhoto(e.target.files[0]);
     }
-
 
     function addNewOrganism(e) {
         e.preventDefault();
@@ -32,10 +35,10 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
             method: "POST",
             body: formData
         })
-        .then(result => result.json())
-        .then(() => fetch(`/api/v1/organisms/${user.id}`))
-        .then(result => result.json())
-        .then(result => setOrganisms(result));
+            .then(result => result.json())
+            .then(() => fetch(`/api/v1/organisms/${user.id}`))
+            .then(result => result.json())
+            .then(result => setOrganisms(result));
 
         e.target.reset();
     }
@@ -67,7 +70,7 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
             body: JSON.stringify(editOrgObj)
         })
             .then(result => result.json())
-            .then(() => fetch("/api/v1/organisms"))
+            .then(() => fetch(`/api/v1/organisms/${user.id}`))
             .then(result => result.json())
             .then(result => setOrganisms(result));
 
@@ -78,44 +81,39 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
     }
 
     return (
-        <React.Fragment>
-            <div className="orgformdiv">
-                <div className="neworgform">
-                    <Form onSubmit={addNewOrganism}>
+        <div>
+            <Button onClick={toggle}>Add new plant</Button>
+            <Modal centered isOpen={modal} toggle={toggle}>
+                <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em'}} onSubmit={addNewOrganism}>
+                    <FormGroup>
+                        <Label>Plant Name:</Label>
+                        <Input onChange={handleNewOrgName} type="text" placeholder="What's your plant's name?"></Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Species:</Label>
+                        <Input onChange={handleNewOrgSpecies} type="text" placeholder="What kind of plant is it?"></Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Photo:</Label>
+                        <Input onChange={handleNewOrgPhoto} type="file" accept="image/*" placeholder="Upload photo here"></Input>
+                    </FormGroup>
+                    <Button onClick={toggle} type="submit">Add new plant</Button>
+                </Form>
+            </Modal>
+            <Modal centered isOpen={organismForm} toggle={editToggle}>
+                <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em'}} onSubmit={editOrganism}>
                         <FormGroup>
                             <Label>Plant Name:</Label>
-                            <Input onChange={handleNewOrgName} type="text" placeholder="What's your plant's name?"></Input>
+                            <Input value={organismNameToEdit} onChange={changeName} type="text" placeholder="Edit plant name"></Input>
                         </FormGroup>
                         <FormGroup>
                             <Label>Species:</Label>
-                            <Input onChange={handleNewOrgSpecies} type="text" placeholder="What kind of plant is it?"></Input>
+                            <Input value={organismSpeciesToEdit} onChange={changeSpecies} type="text" placeholder="Edit plant species"></Input>
                         </FormGroup>
-                        <FormGroup>
-                            <Label>Photo:</Label>
-                            <Input onChange={handleNewOrgPhoto} type="file" accept="image/*" placeholder="Upload photo here"></Input>
-                        </FormGroup>
-                        <Button type="submit">Add new plant</Button>
+                        <Button onClick={editToggle} type="submit">Edit</Button>
                     </Form>
-                </div>
-                {organismForm ? (
-                    <div className="editorgform">
-                        <Form onSubmit={editOrganism}>
-                            <FormGroup>
-                                <Label>Plant Name:</Label>
-                                <Input value={organismNameToEdit} onChange={changeName} type="text" placeholder="Edit plant name"></Input>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>Species:</Label>
-                                <Input value={organismSpeciesToEdit} onChange={changeSpecies} type="text" placeholder="Edit plant species"></Input>
-                            </FormGroup>
-                            <Button type="submit">Edit your plant</Button>
-                        </Form>
-                    </div>
-                ) : (
-                    null
-                )}
-            </div>
-        </React.Fragment>
+            </Modal>
+        </div>
     );
 }
 

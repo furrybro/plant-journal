@@ -23,10 +23,10 @@ function NavBar({ user, setUser }) {
                     {/* <Navbar> */}
                         <NavbarBrand>THE PLANT JOURNAL</NavbarBrand>
                         {/* <Nav> */}
-                            <NavItem className="me-right" style={{ fontSize: '18px' }}>
+                            <NavItem style={{ fontSize: '18px' }}>
                                 <NavLink href="/">Garden</NavLink>
                             </NavItem>
-                            <NavItem className="me-right" style={{ fontSize: '18px' }}>
+                            <NavItem style={{ fontSize: '18px' }}>
                                 <NavLink onClick={handleLogoutClick}>Logout</NavLink>
                             </NavItem>
                         {/* </Nav> */}

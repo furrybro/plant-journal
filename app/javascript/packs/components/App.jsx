@@ -9,9 +9,9 @@ import { Container } from "reactstrap";
 import succulent from "/app/assets/images/succulent";
 
 function App() {
-    const [ user, setUser ] = useState(null);
-    const [ organismId, setOrganismId ] = useState();
-    const [ entryForm, setEntryForm ] = useState(false);
+    const [user, setUser] = useState(null);
+    const [organismId, setOrganismId] = useState();
+    const [entryForm, setEntryForm] = useState(false);
 
     useEffect(() => {
         fetch("/api/v1/me", {
@@ -32,7 +32,7 @@ function App() {
     return (
         <div className="bg-image d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${succulent})`, height:'100vh', backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
                 <NavBar user={user} setUser={setUser} />
-            <div style={{ position: 'static', maxHeight: '80vh', overflow: 'auto' }}>
+            <div style={{ maxHeight: '80vh', overflow: 'auto' }}>
                 <BrowserRouter>
                     <main>
                         {user ? (
