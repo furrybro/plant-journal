@@ -22,14 +22,14 @@ function NavBar({ user, setUser }) {
                 <Container fluid>
                     {/* <Navbar> */}
                         <NavbarBrand>THE PLANT JOURNAL</NavbarBrand>
-                        {/* <Nav> */}
+                        <Nav>
                             <NavItem style={{ fontSize: '18px' }}>
                                 <NavLink href="/">Garden</NavLink>
                             </NavItem>
                             <NavItem style={{ fontSize: '18px' }}>
                                 <NavLink onClick={handleLogoutClick}>Logout</NavLink>
                             </NavItem>
-                        {/* </Nav> */}
+                        </Nav>
                     {/* </Navbar> */}
                 </Container>
             ) : (
