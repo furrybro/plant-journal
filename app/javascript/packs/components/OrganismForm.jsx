@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Form, Button, FormGroup, Input, Label, Modal } from "reactstrap";
 
-function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameToEdit, setOrganismNameToEdit, organismSpeciesToEdit, setOrganismSpeciesToEdit, organismForm, setOrganismForm }) {
+function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameToEdit, setOrganismNameToEdit, organismSpeciesToEdit, setOrganismSpeciesToEdit, organismForm, setOrganismForm, modal, setModal }) {
     const [newOrganismName, setNewOrganismName] = useState("");
     const [newOrganismSpecies, setNewOrganismSpecies] = useState("");
     const [newOrganismPhoto, setNewOrganismPhoto] = useState(null);
-    const [modal, setModal] = useState(false);
+    // const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
     const editToggle = () => setOrganismForm(!organismForm);
@@ -82,7 +82,7 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
 
     return (
         <div>
-            <Button onClick={toggle}>Add new plant</Button>
+            {/* <Button onClick={toggle}>Add new plant</Button> */}
             <Modal centered isOpen={modal} toggle={toggle}>
                 <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em'}} onSubmit={addNewOrganism}>
                     <FormGroup>
