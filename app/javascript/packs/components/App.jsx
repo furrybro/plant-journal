@@ -9,7 +9,7 @@ import succulent from "/app/assets/images/succulent";
 
 function App() {
     const [user, setUser] = useState(null);
-    
+
     const [entryForm, setEntryForm] = useState(false);
 
     useEffect(() => {
@@ -27,11 +27,10 @@ function App() {
     }, []);
 
     return (
-        <div className="bg-image d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${succulent})`, height:'100vh', backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
-                
-            <div style={{ maxHeight: '80vh', overflow: 'auto' }}>
-                <BrowserRouter>
-                <NavBar user={user} setUser={setUser} />
+        <BrowserRouter>
+            <NavBar user={user} setUser={setUser} />
+            <div className="bg-image d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${succulent})`, height: '100vh', backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+                <div style={{ maxHeight: '80vh', overflow: 'auto' }}>
                     <main>
                         {user ? (
                             <Routes>
@@ -43,15 +42,13 @@ function App() {
                                 <Route path="/" element={<Login setUser={setUser} />} />
                                 <Route path="/signup" element={<SignUp setUser={setUser} />} />
                                 <Route path="/login" element={<Login setUser={setUser} />} />
-                                <Route path="/entries/:organism_id" element={<Entries entryForm={entryForm} setEntryForm={setEntryForm}/>} />
+                                <Route path="/entries/:organism_id" element={<Entries entryForm={entryForm} setEntryForm={setEntryForm} />} />
                             </Routes>
                         )}
                     </main>
-                </BrowserRouter>
+                </div>
             </div>
-        </div>
-
-
+        </BrowserRouter>
     );
 }
 

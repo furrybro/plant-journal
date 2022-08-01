@@ -42,11 +42,11 @@ function OrganismCard({ user, name, species, image, organismId, setOrganismIdToE
                             ☰
                         </DropdownToggle>
                         <DropdownMenu>
-                            <DropdownItem>
-                                <Button value={name} title={species} name={organismId} onClick={sendOrganismToEdit}>edit plant</Button>
+                            <DropdownItem value={name} title={species} name={organismId} onClick={sendOrganismToEdit}>
+                                edit plant
                             </DropdownItem>
-                            <DropdownItem>
-                                <Button color="danger" value={organismId} onClick={handleDeleteOrganism}>plant died :(</Button>
+                            <DropdownItem value={organismId} onClick={handleDeleteOrganism}>
+                                plant died :(
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledButtonDropdown>
