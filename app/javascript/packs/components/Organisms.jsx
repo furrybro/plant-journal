@@ -1,6 +1,7 @@
 import React from "react";
 import OrganismCard from "./OrganismCard";
-import { Card, Col, Row, Container, CardBody, Button } from "reactstrap";
+import { Card, Col, Row, Container, CardBody, Button, CardImg, CardTitle, CardSubtitle } from "reactstrap";
+import cactus from "/app/assets/images/cactus";
 
 function Organisms({ user, organisms, setOrganisms, setOrganismId, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm, modal, setModal }) {
 
@@ -21,8 +22,18 @@ function Organisms({ user, organisms, setOrganisms, setOrganismId, setOrganismNa
                 {renderEachOrganism}
                 <Col>
                     <Card style={{ width: '18rem', height: '438.72px' }}>
-                        <CardBody className="text-center">
-                            <Button onClick={toggle}>Add new plant</Button>
+                        <CardImg
+                            alt="plant image placeholder"
+                            src={cactus}
+                            top
+                            style={{ height: '35vh', objectFit: 'cover' }}
+                            width="100%"
+                        />
+                        <CardBody>
+                            <CardTitle tag="h4">Plant Name</CardTitle>
+                            <CardSubtitle tag="h6">Plant Species</CardSubtitle>
+                            <br></br>
+                            <Button style={{ float: 'right' }} onClick={toggle}>add new plant +</Button>
                         </CardBody>
                     </Card>
                 </Col>
