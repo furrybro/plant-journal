@@ -10,12 +10,11 @@ function Garden({ user, setShowOrganismName }) {
     const [modal, setModal] = useState(false);
     const [organismIdToEdit, setOrganismIdToEdit] = useState();
 
-    setShowOrganismName("");
-
     useEffect(() => {
         fetch(`/api/v1/organisms/${user.id}`)
             .then(result => result.json())
             .then(result => setOrganisms(result));
+            setShowOrganismName("");
     }, []);
 
     return (
