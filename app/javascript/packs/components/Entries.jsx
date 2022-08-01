@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Card, Button, CardTitle, CardImg, CardSubtitle, CardBody, Container, Row, Col, Modal, Form, FormGroup, Input, Label } from "reactstrap";
 import EntryForm from "./EntryForm";
 import { DateTime } from "luxon";
+import { useParams } from "react-router-dom";
 
 
-function Entries({ organismId, entryForm, setEntryForm }) {
+function Entries({ entryForm, setEntryForm }) {
     const [entries, setEntries] = useState([]);
     const [noteToEdit, setNoteToEdit] = useState("");
     const [dateToEdit, setDateToEdit] = useState(DateTime.now());
     const [entryId, setEntryId] = useState();
     const [modal, setModal] = useState(false);
 
+    const organismId = useParams().organism_id;
+    
     const toggle = () => setModal(!modal);
     const editToggle = () => setEntryForm(!entryForm);
 
@@ -18,7 +21,7 @@ function Entries({ organismId, entryForm, setEntryForm }) {
         fetch(`/api/v1/entries/${organismId}`)
             .then(result => result.json())
             .then(result => setEntries(result));
-    }, []);
+    }, []);    
 
     function changeNote(e) {
         let newNote = e.target.value;

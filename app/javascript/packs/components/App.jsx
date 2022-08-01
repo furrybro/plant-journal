@@ -5,12 +5,11 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 import NavBar from "./NavBar";
 import Entries from "./Entries";
-import { Container } from "reactstrap";
 import succulent from "/app/assets/images/succulent";
 
 function App() {
     const [user, setUser] = useState(null);
-    const [organismId, setOrganismId] = useState();
+    
     const [entryForm, setEntryForm] = useState(false);
 
     useEffect(() => {
@@ -27,25 +26,24 @@ function App() {
             });
     }, []);
 
-    // console.log("the user is currently logged", user ? "in" : "out")
-
     return (
         <div className="bg-image d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${succulent})`, height:'100vh', backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
-                <NavBar user={user} setUser={setUser} />
+                
             <div style={{ maxHeight: '80vh', overflow: 'auto' }}>
                 <BrowserRouter>
+                <NavBar user={user} setUser={setUser} />
                     <main>
                         {user ? (
                             <Routes>
-                                <Route path="/" element={<Garden organismId={organismId} setOrganismId={setOrganismId} user={user} />} />
-                                <Route path="/entries" element={<Entries organismId={organismId} entryForm={entryForm} setEntryForm={setEntryForm} />} />
+                                <Route path="/" element={<Garden user={user} />} />
+                                <Route path="/entries/:organism_id" element={<Entries entryForm={entryForm} setEntryForm={setEntryForm} />} />
                             </Routes>
                         ) : (
                             <Routes>
                                 <Route path="/" element={<Login setUser={setUser} />} />
                                 <Route path="/signup" element={<SignUp setUser={setUser} />} />
                                 <Route path="/login" element={<Login setUser={setUser} />} />
-                                <Route path="/entries" element={<Entries organismId={organismId} entryForm={entryForm} setEntryForm={setEntryForm}/>} />
+                                <Route path="/entries/:organism_id" element={<Entries entryForm={entryForm} setEntryForm={setEntryForm}/>} />
                             </Routes>
                         )}
                     </main>

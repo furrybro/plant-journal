@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Container, Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarText, Button } from "reactstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { Container, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 
 
 function NavBar({ user, setUser }) {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggle = () => setIsOpen(!isOpen);
+    const navigate = useNavigate();
 
     function handleLogoutClick() {
         fetch("/api/v1/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
                 setUser(null);
+                navigate("/login");
             }
         });
     }

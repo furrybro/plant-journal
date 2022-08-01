@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Form, Button, FormGroup, Input, Label, Modal } from "reactstrap";
 
-function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameToEdit, setOrganismNameToEdit, organismSpeciesToEdit, setOrganismSpeciesToEdit, organismForm, setOrganismForm, modal, setModal }) {
+function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit, setOrganismNameToEdit, organismSpeciesToEdit, setOrganismSpeciesToEdit, organismForm, setOrganismForm, modal, setModal }) {
     const [newOrganismName, setNewOrganismName] = useState("");
     const [newOrganismSpecies, setNewOrganismSpecies] = useState("");
     const [newOrganismPhoto, setNewOrganismPhoto] = useState(null);
-    // const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
     const editToggle = () => setOrganismForm(!organismForm);
@@ -61,7 +60,7 @@ function OrganismForm({ user, organisms, setOrganisms, organismId, organismNameT
             user_id: user.id
         };
 
-        fetch(`/api/v1/organisms/${organismId}`, {
+        fetch(`/api/v1/organisms/${organismIdToEdit}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

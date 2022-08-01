@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Card, CardBody, CardTitle, Col, CardSubtitle, CardImg, ButtonGroup, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Card, CardBody, CardTitle, Col, CardSubtitle, CardImg, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
-function OrganismCard({ user, name, species, image, organism, organismId, setOrganismId, organisms, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm }) {
-
-    function handleEntryClick(e) {
-        setOrganismId(e.target.value);
-    }
+function OrganismCard({ user, name, species, image, organismId, setOrganismIdToEdit, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm }) {
 
     function handleDeleteOrganism(e) {
-        fetch(`/api/v1/organisms/${e.target.value}`, {
+        fetch(`/api/v1/organisms/${organismId}`, {
             method: "DELETE"
         })
             .then(() => fetch(`/api/v1/organisms/${user.id}`))
@@ -20,7 +16,7 @@ function OrganismCard({ user, name, species, image, organism, organismId, setOrg
     function sendOrganismToEdit(e) {
         setOrganismNameToEdit(e.target.value);
         setOrganismSpeciesToEdit(e.target.title);
-        setOrganismId(e.target.name);
+        setOrganismIdToEdit(e.target.name);
         setOrganismForm(true);
     }
 
@@ -38,8 +34,8 @@ function OrganismCard({ user, name, species, image, organism, organismId, setOrg
                     <CardTitle tag="h4">{name}</CardTitle>
                     <CardSubtitle tag="h6">{species}</CardSubtitle>
                     <br></br>
-                        <Link to="/entries">
-                            <Button value={organismId} onClick={handleEntryClick}>see entries</Button>
+                        <Link to={`/entries/${organismId}`}>
+                            <Button value={organismId}>see entries</Button>
                         </Link>
                         <UncontrolledButtonDropdown style={{ float: 'right' }}>
                             <DropdownToggle style={{ borderRadius: '8px' }}>

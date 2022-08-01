@@ -37,7 +37,7 @@ function EntryForm({ organismId, setEntries, modal, setModal }) {
             .then(() => fetch(`/api/v1/entries/${organismId}`))
             .then(result => result.json())
             .then(result => setEntries(result));
-
+        
         e.target.reset();
         setNewEntryNote("");
         setNewEntryDate(DateTime.now());
@@ -48,7 +48,7 @@ function EntryForm({ organismId, setEntries, modal, setModal }) {
             <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em' }} onSubmit={addNewNote}>
                 <FormGroup>
                     <Label>Note:</Label>
-                    <Input value={newEntryNote} onChange={handleNewEntryNote} type="text" placeholder="What's going on with your plant today?"></Input>
+                    <Input value={newEntryNote} onChange={handleNewEntryNote} type="textarea" placeholder="What's going on with your plant today?"></Input>
                 </FormGroup>
                 <FormGroup>
                     <Label>Date:</Label>
