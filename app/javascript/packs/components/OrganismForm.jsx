@@ -83,7 +83,7 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
         <div>
             {/* <Button onClick={toggle}>Add new plant</Button> */}
             <Modal centered isOpen={modal} toggle={toggle}>
-                <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em'}} onSubmit={addNewOrganism}>
+                <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em', fontFamily: 'Poppins'}} onSubmit={addNewOrganism}>
                     <FormGroup>
                         <Label>Plant Name:</Label>
                         <Input onChange={handleNewOrgName} type="text" placeholder="What's your plant's name?"></Input>
@@ -100,7 +100,7 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
                 </Form>
             </Modal>
             <Modal centered isOpen={organismForm} toggle={editToggle}>
-                <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em'}} onSubmit={editOrganism}>
+                <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em', fontFamily: 'Poppins'}} onSubmit={editOrganism}>
                         <FormGroup>
                             <Label>Plant Name:</Label>
                             <Input value={organismNameToEdit} onChange={changeName} type="text" placeholder="Edit plant name"></Input>

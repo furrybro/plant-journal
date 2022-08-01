@@ -3,8 +3,8 @@ import { Button, Form, FormGroup, Input, Label, FormText } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
 function Login({ setUser }) {
-    const [ username, setUsername ] = useState("");
-    const [ password, setPassword ] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ function Login({ setUser }) {
     }
 
     return (
-        <div className="formdiv">
+        <div className="formdiv" style={{ fontFamily: 'Poppins' }}>
             <Form className="form" onSubmit={handleSubmit}>
                 <h1 className="header">LOGIN</h1>
                 <FormGroup>

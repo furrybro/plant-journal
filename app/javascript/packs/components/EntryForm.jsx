@@ -45,7 +45,7 @@ function EntryForm({ organismId, setEntries, modal, setModal }) {
 
     return (
         <div>
-            <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em' }} onSubmit={addNewNote}>
+            <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em', fontFamily: 'Poppins' }} onSubmit={addNewNote}>
                 <FormGroup>
                     <Label>Note:</Label>
                     <Input value={newEntryNote} onChange={handleNewEntryNote} type="textarea" placeholder="What's going on with your plant today?"></Input>

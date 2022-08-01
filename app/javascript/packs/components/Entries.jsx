@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, CardTitle, CardImg, CardSubtitle, CardText, CardBody, Container, Row, Col, Modal, Form, FormGroup, Input, Label, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { Card, Button, CardImg, CardSubtitle, CardText, CardBody, Container, Row, Col, Modal, Form, FormGroup, Input, Label, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import EntryForm from "./EntryForm";
 import { DateTime } from "luxon";
 import { useParams } from "react-router-dom";
 import cactus from "/app/assets/images/cactus";
 
 
-function Entries({ entryForm, setEntryForm }) {
+function Entries({ entryForm, setEntryForm, setShowOrganismName, setShowOrganismSpecies }) {
     const [entries, setEntries] = useState([]);
     const [noteToEdit, setNoteToEdit] = useState("");
     const [dateToEdit, setDateToEdit] = useState(DateTime.now());
@@ -21,7 +21,10 @@ function Entries({ entryForm, setEntryForm }) {
     useEffect(() => {
         fetch(`/api/v1/entries/${organismId}`)
             .then(result => result.json())
-            .then(result => setEntries(result));
+            .then(result => {
+                setEntries(result);
+                setShowOrganismName(`${result[0].organism.name} the ${result[0].organism.species}`);
+            });
     }, []);
 
     function changeNote(e) {
@@ -85,7 +88,7 @@ function Entries({ entryForm, setEntryForm }) {
         if (entry.entry_image === null) {
             return (
                 <Col className="col-12 col-md-6 col-lg-4" key={entry.id}>
-                    <Card style={{ height: '438.72px' }}>
+                    <Card style={{ height: '438.72px', fontFamily: 'Poppins' }}>
                         <CardImg
                             alt="entry image placeholder"
                             src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"
@@ -116,7 +119,7 @@ function Entries({ entryForm, setEntryForm }) {
         } else {
             return (
                 <Col className="col-12 col-md-6 col-lg-4" key={entry.id}>
-                    <Card style={{ height: '438.72px' }}>
+                    <Card style={{ height: '438.72px', fontFamily: 'Poppins' }}>
                         <CardImg
                             alt="entry image placeholder"
                             src={entry.entry_image.url !== undefined ? entry.entry_image.url : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"}
@@ -148,43 +151,45 @@ function Entries({ entryForm, setEntryForm }) {
     });
 
     return (
-        <Container>
-            <Row className="g-3">
-                {renderEachEntry}
-                <Col className="col-12 col-md-6 col-lg-4">
-                    <Card style={{ minWidth: '300px', height: '438.72px' }}>
-                        <CardImg
-                            alt="plant image placeholder"
-                            src={cactus}
-                            top
-                            style={{ height: '35vh', objectFit: 'cover' }}
-                            width="100%"
-                        />
-                        <CardBody>
-                            <CardSubtitle style={{ fontWeight: 'bold' }}>New Entry Date</CardSubtitle>
-                            <CardText style={{ height: '45px', overflowY: 'auto', maxHeight: '45px' }}>New Entry</CardText>
-                            <Button style={{ float: 'right' }} onClick={toggle}>add new entry +</Button>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
-            <Modal centered isOpen={modal} toggle={toggle}>
-                <EntryForm organismId={organismId} setEntries={setEntries} modal={modal} setModal={setModal} />
-            </Modal>
-            <Modal centered isOpen={entryForm} toggle={editToggle}>
-                <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em' }} onSubmit={editEntry}>
-                    <FormGroup>
-                        <Label>Note:</Label>
-                        <Input value={noteToEdit} onChange={changeNote} type="textarea" placeholder="Edit note here"></Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Date:</Label>
-                        <Input value={dateToEdit.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={changeDate} type="datetime-local"></Input>
-                    </FormGroup>
-                    <Button type="submit">Edit your entry</Button>
-                </Form>
-            </Modal>
-        </Container>
+        <div>
+            <Container>
+                <Row className="g-3">
+                    {renderEachEntry}
+                    <Col className="col-12 col-md-6 col-lg-4">
+                        <Card style={{ minWidth: '300px', height: '438.72px', fontFamily: 'Poppins' }}>
+                            <CardImg
+                                alt="plant image placeholder"
+                                src={cactus}
+                                top
+                                style={{ height: '35vh', objectFit: 'cover' }}
+                                width="100%"
+                            />
+                            <CardBody>
+                                <CardSubtitle style={{ fontWeight: 'bold' }}>New Entry Date</CardSubtitle>
+                                <CardText style={{ height: '45px', overflowY: 'auto', maxHeight: '45px' }}>New Entry</CardText>
+                                <Button style={{ float: 'right' }} onClick={toggle}>add new entry +</Button>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+                <Modal centered isOpen={modal} toggle={toggle}>
+                    <EntryForm organismId={organismId} setEntries={setEntries} modal={modal} setModal={setModal} />
+                </Modal>
+                <Modal centered isOpen={entryForm} toggle={editToggle}>
+                    <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em', fontFamily: 'Poppins' }} onSubmit={editEntry}>
+                        <FormGroup>
+                            <Label>Note:</Label>
+                            <Input value={noteToEdit} onChange={changeNote} type="textarea" placeholder="Edit note here"></Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Date:</Label>
+                            <Input value={dateToEdit.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={changeDate} type="datetime-local"></Input>
+                        </FormGroup>
+                        <Button type="submit">Edit your entry</Button>
+                    </Form>
+                </Modal>
+            </Container>
+        </div>
     );
 }
 

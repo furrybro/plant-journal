@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, NavbarBrand, Nav, NavItem, NavLink, Button, NavbarToggler } from "reactstrap";
+import { NavbarBrand, Nav, NavbarToggler, NavItem } from "reactstrap";
 
 
-function NavBar({ user, setUser }) {
+function NavBar({ user, setUser, showOrganismName }) {
     const navigate = useNavigate();
 
     function handleLogoutClick() {
@@ -18,10 +18,10 @@ function NavBar({ user, setUser }) {
     return (
         <div>
             {user ? (
-                // <Container>
-                <Nav className="navbar navbar-expand-md" style={{ backgroundColor: 'rgba(176, 202, 148)' }}>
+                <Nav className="navbar navbar-expand-md" style={{ backgroundColor: 'rgba(176, 202, 148)', fontFamily: 'Poppins' }}>
                     <div className="container-fluid">
                           <NavbarBrand>THE PLANT JOURNAL</NavbarBrand>
+                          {showOrganismName ? (<NavItem>{showOrganismName}</NavItem>) : (null)}
                         <NavbarToggler
                             className="navbar-toggler"
                             type="button"
@@ -36,7 +36,7 @@ function NavBar({ user, setUser }) {
                         <div className="collapse navbar-collapse" id="toggleMobileMenu">
                             <ul className="navbar-nav ms-auto text-center">
                                 <li>
-                                    <a className="nav-link" href="/">Garden</a>
+                                    <a className="nav-link" href="/">{user.username}'s Garden</a>
                                 </li>
                                 <li>
                                     <a className="nav-link">Profile</a>
@@ -48,20 +48,6 @@ function NavBar({ user, setUser }) {
                         </div>
                     </div>
                 </Nav>
-                // </Container> 
-                // <Nav className="navbar fixed-top" style={{ backgroundColor: 'rgba(176, 202, 148)' }}>
-                //     <Container fluid>
-                //         <NavbarBrand>THE PLANT JOURNAL</NavbarBrand>
-                //         <Nav>
-                //             <NavItem style={{ fontSize: '18px' }}>
-                //                 <NavLink href="/">Garden</NavLink>
-                //             </NavItem>
-                //             <NavItem style={{ fontSize: '18px' }}>
-                //                 <NavLink onClick={handleLogoutClick}>Logout</NavLink>
-                //             </NavItem>
-                //         </Nav>
-                //     </Container>
-                // </Nav>
             ) : (
                 null
             )}

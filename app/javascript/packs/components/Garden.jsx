@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import Organisms from "./Organisms";
 import OrganismForm from "./OrganismForm";
 
-function Garden({ user }) {
+function Garden({ user, setShowOrganismName }) {
     const [organisms, setOrganisms] = useState([]);
     const [organismNameToEdit, setOrganismNameToEdit] = useState("");
     const [organismSpeciesToEdit, setOrganismSpeciesToEdit] = useState("");
     const [organismForm, setOrganismForm] = useState(false);
     const [modal, setModal] = useState(false);
     const [organismIdToEdit, setOrganismIdToEdit] = useState();
+
+    setShowOrganismName("");
 
     useEffect(() => {
         fetch(`/api/v1/organisms/${user.id}`)

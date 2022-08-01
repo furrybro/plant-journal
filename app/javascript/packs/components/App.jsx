@@ -9,8 +9,8 @@ import succulent from "/app/assets/images/succulent";
 
 function App() {
     const [user, setUser] = useState(null);
-
     const [entryForm, setEntryForm] = useState(false);
+    const [showOrganismName, setShowOrganismName] = useState("");
 
     useEffect(() => {
         fetch("/api/v1/me", {
@@ -28,21 +28,21 @@ function App() {
 
     return (
         <BrowserRouter>
-            <NavBar user={user} setUser={setUser} />
+            <NavBar user={user} setUser={setUser} showOrganismName={showOrganismName}/>
             <div className="bg-image d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${succulent})`, height: '100vh', backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
                 <div style={{ maxHeight: '80vh', overflow: 'auto' }}>
                     <main>
                         {user ? (
                             <Routes>
-                                <Route path="/" element={<Garden user={user} />} />
-                                <Route path="/entries/:organism_id" element={<Entries entryForm={entryForm} setEntryForm={setEntryForm} />} />
+                                <Route path="/" element={<Garden user={user} setShowOrganismName={setShowOrganismName}/>} />
+                                <Route path="/entries/:organism_id" element={<Entries entryForm={entryForm} setEntryForm={setEntryForm} setShowOrganismName={setShowOrganismName}/>} />
                             </Routes>
                         ) : (
                             <Routes>
                                 <Route path="/" element={<Login setUser={setUser} />} />
                                 <Route path="/signup" element={<SignUp setUser={setUser} />} />
                                 <Route path="/login" element={<Login setUser={setUser} />} />
-                                <Route path="/entries/:organism_id" element={<Entries entryForm={entryForm} setEntryForm={setEntryForm} />} />
+                                <Route path="/entries/:organism_id" element={<Entries entryForm={entryForm} setEntryForm={setEntryForm} setShowOrganismName={setShowOrganismName}/>} />
                             </Routes>
                         )}
                     </main>
