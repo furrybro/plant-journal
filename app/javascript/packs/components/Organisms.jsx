@@ -17,11 +17,11 @@ function Organisms({ user, organisms, setOrganisms, setOrganismIdToEdit, setOrga
     })
 
     return (
-        <Container className="d-grid gap-3">
-            <Row className="row-cols-4 row-cols-md-4 g-4">
+        <Container>
+            <Row className="g-3">
                 {renderEachOrganism}
-                <Col>
-                    <Card style={{ width: '18rem', height: '438.72px' }}>
+                <Col className="col-12 col-md-6 col-lg-4">
+                    <Card style={{ minWidth: '280px', height: '438.72px' }}>
                         <CardImg
                             alt="plant image placeholder"
                             src={cactus}

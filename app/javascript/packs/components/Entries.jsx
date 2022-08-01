@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, CardTitle, CardImg, CardSubtitle, CardBody, Container, Row, Col, Modal, Form, FormGroup, Input, Label } from "reactstrap";
+import { Card, Button, CardTitle, CardImg, CardSubtitle, CardText, CardBody, Container, Row, Col, Modal, Form, FormGroup, Input, Label, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import EntryForm from "./EntryForm";
 import { DateTime } from "luxon";
 import { useParams } from "react-router-dom";
+import cactus from "/app/assets/images/cactus";
 
 
 function Entries({ entryForm, setEntryForm }) {
@@ -13,7 +14,7 @@ function Entries({ entryForm, setEntryForm }) {
     const [modal, setModal] = useState(false);
 
     const organismId = useParams().organism_id;
-    
+
     const toggle = () => setModal(!modal);
     const editToggle = () => setEntryForm(!entryForm);
 
@@ -21,7 +22,7 @@ function Entries({ entryForm, setEntryForm }) {
         fetch(`/api/v1/entries/${organismId}`)
             .then(result => result.json())
             .then(result => setEntries(result));
-    }, []);    
+    }, []);
 
     function changeNote(e) {
         let newNote = e.target.value;
@@ -83,8 +84,8 @@ function Entries({ entryForm, setEntryForm }) {
 
         if (entry.entry_image === null) {
             return (
-                <Col>
-                    <Card style={{ width: '18rem' }} key={entry.id}>
+                <Col className="col-12 col-md-6 col-lg-4">
+                    <Card style={{ height: '438.72px' }} key={entry.id}>
                         <CardImg
                             alt="entry image placeholder"
                             src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"
@@ -93,18 +94,29 @@ function Entries({ entryForm, setEntryForm }) {
                             width="100%"
                         />
                         <CardBody>
-                            <CardTitle tag="h5">{entry.note}</CardTitle>
-                            <CardSubtitle tag="h6">{formatDate}</CardSubtitle>
-                            <Button onClick={handleEditEntry}>edit entry</Button>
-                            <Button value={entry.id} onClick={handleDeleteEntry}>delete entry</Button>
+                            <CardSubtitle style={{ fontWeight: 'bold' }}>{formatDate}</CardSubtitle>
+                            <CardText style={{ height: '45px', overflow: 'auto', maxHeight: '45px' }}>{entry.note}</CardText>
+                            <UncontrolledButtonDropdown style={{ float: 'right' }}>
+                                <DropdownToggle style={{ borderRadius: '8px' }}>
+                                    ☰
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem>
+                                        <Button onClick={handleEditEntry}>edit entry</Button>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <Button color="danger" value={entry.id} onClick={handleDeleteEntry}>delete entry</Button>
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </UncontrolledButtonDropdown>
                         </CardBody>
                     </Card>
                 </Col>
             );
         } else {
             return (
-                <Col>
-                    <Card style={{ width: '18rem' }} key={entry.id}>
+                <Col className="col-12 col-md-6 col-lg-4">
+                    <Card style={{ height: '438.72px' }} key={entry.id}>
                         <CardImg
                             alt="entry image placeholder"
                             src={entry.entry_image.url !== undefined ? entry.entry_image.url : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"}
@@ -113,10 +125,21 @@ function Entries({ entryForm, setEntryForm }) {
                             width="100%"
                         />
                         <CardBody>
-                            <CardTitle tag="h5">{entry.note}</CardTitle>
-                            <CardSubtitle tag="h6">{formatDate}</CardSubtitle>
-                            <Button onClick={handleEditEntry}>edit entry</Button>
-                            <Button value={entry.id} onClick={handleDeleteEntry}>delete entry</Button>
+                            <CardSubtitle style={{ fontWeight: 'bold' }}>{formatDate}</CardSubtitle>
+                            <CardText style={{ height: '45px', overflow: 'auto', maxHeight: '45px' }}>{entry.note}</CardText>
+                            <UncontrolledButtonDropdown style={{ float: 'right' }}>
+                                <DropdownToggle style={{ borderRadius: '8px' }}>
+                                    ☰
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem>
+                                        <Button onClick={handleEditEntry}>edit entry</Button>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <Button color="danger" value={entry.id} onClick={handleDeleteEntry}>delete entry</Button>
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </UncontrolledButtonDropdown>
                         </CardBody>
                     </Card>
                 </Col>
@@ -125,11 +148,26 @@ function Entries({ entryForm, setEntryForm }) {
     });
 
     return (
-        <Container className="d-grid gap-3">
-            <Row className="row-cols-4 row-cols-md-4 g-4">
+        <Container>
+            <Row className="g-3">
                 {renderEachEntry}
+                <Col className="col-12 col-md-6 col-lg-4">
+                    <Card style={{ minWidth: '300px', height: '438.72px' }}>
+                        <CardImg
+                            alt="plant image placeholder"
+                            src={cactus}
+                            top
+                            style={{ height: '35vh', objectFit: 'cover' }}
+                            width="100%"
+                        />
+                        <CardBody>
+                            <CardSubtitle style={{ fontWeight: 'bold' }}>New Entry Date</CardSubtitle>
+                            <CardText style={{ height: '45px', overflowY: 'auto', maxHeight: '45px' }}>New Entry</CardText>
+                            <Button style={{ float: 'right' }} onClick={toggle}>add new entry +</Button>
+                        </CardBody>
+                    </Card>
+                </Col>
             </Row>
-            <Button onClick={toggle}>Add new entry</Button>
             <Modal centered isOpen={modal} toggle={toggle}>
                 <EntryForm organismId={organismId} setEntries={setEntries} modal={modal} setModal={setModal} />
             </Modal>
@@ -137,7 +175,7 @@ function Entries({ entryForm, setEntryForm }) {
                 <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em' }} onSubmit={editEntry}>
                     <FormGroup>
                         <Label>Note:</Label>
-                        <Input value={noteToEdit} onChange={changeNote} type="text" placeholder="Edit note here"></Input>
+                        <Input value={noteToEdit} onChange={changeNote} type="textarea" placeholder="Edit note here"></Input>
                     </FormGroup>
                     <FormGroup>
                         <Label>Date:</Label>

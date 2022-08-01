@@ -21,8 +21,8 @@ function OrganismCard({ user, name, species, image, organismId, setOrganismIdToE
     }
 
     return (
-        <Col>
-            <Card style={{ width: '18rem' }}>
+        <Col className="col-12 col-md-6 col-lg-4">
+            <Card>
                 <CardImg
                     alt="plant image placeholder"
                     src={image !== undefined ? image : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"}
@@ -34,22 +34,22 @@ function OrganismCard({ user, name, species, image, organismId, setOrganismIdToE
                     <CardTitle tag="h4">{name}</CardTitle>
                     <CardSubtitle tag="h6">{species}</CardSubtitle>
                     <br></br>
-                        <Link to={`/entries/${organismId}`}>
-                            <Button value={organismId}>see entries</Button>
-                        </Link>
-                        <UncontrolledButtonDropdown style={{ float: 'right' }}>
-                            <DropdownToggle style={{ borderRadius: '8px' }}>
-                                ☰
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem>
-                                    <Button value={name} title={species} name={organismId} onClick={sendOrganismToEdit}>edit plant</Button>
-                                </DropdownItem>
-                                <DropdownItem>
-                                    <Button color="danger" value={organismId} onClick={handleDeleteOrganism}>plant died :(</Button>
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledButtonDropdown>
+                    <Link to={`/entries/${organismId}`}>
+                        <Button value={organismId}>see entries</Button>
+                    </Link>
+                    <UncontrolledButtonDropdown style={{ float: 'right' }}>
+                        <DropdownToggle style={{ borderRadius: '8px' }}>
+                            ☰
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem>
+                                <Button value={name} title={species} name={organismId} onClick={sendOrganismToEdit}>edit plant</Button>
+                            </DropdownItem>
+                            <DropdownItem>
+                                <Button color="danger" value={organismId} onClick={handleDeleteOrganism}>plant died :(</Button>
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledButtonDropdown>
                 </CardBody>
             </Card>
         </Col>
