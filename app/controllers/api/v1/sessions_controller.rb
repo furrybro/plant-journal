@@ -2,7 +2,7 @@ class Api::V1::SessionsController < ApplicationController
 
      # POST /login
      def create
-        user = User.find_by(username: params[:username])
+        user = User.find_by!(username: params[:username])
         if user&.authenticate(params[:password])
             puts "Setting session id for user with id: ", user.id
 

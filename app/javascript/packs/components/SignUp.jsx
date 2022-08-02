@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Input, Label, FormText } from "reactstrap";
-// import "/Users/jeena/Development/code/phase-5/plant-journal/app/assets/stylesheets/application.css";
-
+import { useForm } from "react-hook-form";
 
 function SignUp({ setUser }) {
-	const [ username, setUsername ] = useState("");
-	const [ email, setEmail ] = useState("");
-	const [ password, setPassword ] = useState("");
-	const [ passwordConfirmation, setPasswordConfirmation ] = useState("");
+	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -30,25 +29,24 @@ function SignUp({ setUser }) {
 	}
 
 	return (
-		<div className="formdiv">
+		<div className="formdiv" style={{ fontFamily: 'Poppins' }}>
 			<Form className="form" onSubmit={handleSubmit}>
 				<h2 className="header">SIGN UP</h2>
 				<FormGroup>
 					<Label htmlFor="newusername">Username:</Label>
 					<Input
 						type="text"
-						// name="username"
+						name="username"
 						id="newusername"
 						value={username}
+						onChange={(e) => setUsername(e.target.value)}						
 						placeholder="gardener4eva"
-						onChange={(e) => setUsername(e.target.value)}
 					/>
 				</FormGroup>
 				<FormGroup>
 					<Label htmlFor="newemail">Email:</Label>
 					<Input
 						type="email"
-						// name="email"
 						id="newemail"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -59,7 +57,6 @@ function SignUp({ setUser }) {
 					<Label htmlFor="password">Password:</Label>
 					<Input
 						type="password"
-						// name="newpassword"
 						id="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
@@ -70,7 +67,6 @@ function SignUp({ setUser }) {
 					<Label htmlFor="password_confirmation">Confirm Password:</Label>
 					<Input
 						type="password"
-						// name="password"
 						id="password_confirmation"
 						value={passwordConfirmation}
 						onChange={(e) => setPasswordConfirmation(e.target.value)}

@@ -4,7 +4,7 @@ class Api::V1::OrganismsController < ApplicationController
   # GET /organisms or /organisms.json
   def index
     organisms = Organism.all
-    render json: organisms
+    render json: organisms, status: :ok
   end
 
   # GET /organisms/1 or /organisms/1.json

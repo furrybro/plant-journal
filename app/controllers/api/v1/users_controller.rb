@@ -4,22 +4,14 @@ class Api::V1::UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
-    render json: @users
+    render json: @users, status: :ok
   end
 
   # GET /me
   def show
     return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     user = User.find(session[:user_id])
-    render json: user
-  end
-
-  # GET /users/new
-  def new
-  end
-
-  # GET /users/1/edit
-  def edit
+    render json: user, status: :ok
   end
 
   # POST /signup

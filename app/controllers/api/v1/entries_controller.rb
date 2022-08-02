@@ -4,7 +4,7 @@ class Api::V1::EntriesController < ApplicationController
   # GET /entries or /entries.json
   def index
     entries = Entry.all
-    render json: entries
+    render json: entries, status: :ok
   end
 
   # GET /entries/1 or /entries/1.json
@@ -43,4 +43,5 @@ class Api::V1::EntriesController < ApplicationController
     def entry_params
       params.permit(:note, :date, :organism_id, :entry_image)
     end
+
 end
