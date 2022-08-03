@@ -7,7 +7,7 @@ function EntryCard({ entryId, setEntries, formatDate, entryNote, entryDate, imag
         fetch(`/api/v1/entries/${e.target.value}`, {
             method: "DELETE"
         })
-            .then(() => fetch(`/api/v1/entries/${organismId}`))
+            .then(() => fetch(`/api/v1/entries/get_by_organism/${organismId}`))
             .then(result => result.json())
             .then(result => setEntries(result));
     }

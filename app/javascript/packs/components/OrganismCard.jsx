@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, CardBody, CardTitle, Col, CardSubtitle, CardImg, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
-function OrganismCard({ user, name, species, image, organismId, setOrganismIdToEdit, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm, setShowOrganismName }) {
+function OrganismCard({ user, name, species, image, organismId, setOrganismIdToEdit, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm }) {
 
     function handleDeleteOrganism(e) {
         fetch(`/api/v1/organisms/${organismId}`, {
             method: "DELETE"
         })
-            .then(() => fetch(`/api/v1/organisms/${user.id}`))
+            .then(() => fetch(`/api/v1/organisms/get_by_user/${user.id}`))
             .then(result => result.json())
             .then(result => setOrganisms(result));
     }
@@ -18,10 +18,6 @@ function OrganismCard({ user, name, species, image, organismId, setOrganismIdToE
         setOrganismSpeciesToEdit(e.target.title);
         setOrganismIdToEdit(e.target.name);
         setOrganismForm(true);
-    }
-
-    function sendOrganismNameToShow(e) {
-        setShowOrganismName(`${e.target.name} the ${e.target.title}`);
     }
 
     return (
@@ -39,7 +35,7 @@ function OrganismCard({ user, name, species, image, organismId, setOrganismIdToE
                     <CardSubtitle tag="h6">{species}</CardSubtitle>
                     <br></br>
                     <Link to={`/entries/${organismId}`}>
-                        <Button onClick={sendOrganismNameToShow} name={name} title={species} value={organismId}>see entries</Button>
+                        <Button value={organismId}>see entries</Button>
                     </Link>
                     <UncontrolledButtonDropdown style={{ float: 'right' }}>
                         <DropdownToggle style={{ borderRadius: '8px' }}>

@@ -9,6 +9,11 @@ class Api::V1::OrganismsController < ApplicationController
 
   # GET /organisms/1 or /organisms/1.json
   def show
+    organism = find_organism
+    render json: organism, status: :ok
+  end
+
+  def get_by_user
     organism = Organism.where(user_id: params[:id]).order(:name)
     render json: organism
   end

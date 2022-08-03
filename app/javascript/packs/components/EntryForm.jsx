@@ -34,13 +34,14 @@ function EntryForm({ organismId, setEntries, modal, setModal }) {
             body: formData
         })
             .then(result => result.json())
-            .then(() => fetch(`/api/v1/entries/${organismId}`))
+            .then(() => fetch(`/api/v1/entries/get_by_organism/${organismId}`))
             .then(result => result.json())
             .then(result => setEntries(result));
         
         e.target.reset();
         setNewEntryNote("");
         setNewEntryDate(DateTime.now());
+        setNewEntryPhoto(null);
     }
 
     return (

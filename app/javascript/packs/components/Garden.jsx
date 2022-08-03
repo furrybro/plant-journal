@@ -11,7 +11,7 @@ function Garden({ user, setShowOrganismName }) {
     const [organismIdToEdit, setOrganismIdToEdit] = useState();
 
     useEffect(() => {
-        fetch(`/api/v1/organisms/${user.id}`)
+        fetch(`/api/v1/organisms/get_by_user/${user.id}`)
             .then(result => result.json())
             .then(result => setOrganisms(result));
             setShowOrganismName("");
@@ -20,7 +20,7 @@ function Garden({ user, setShowOrganismName }) {
     return (
         <div>
             <div className="d-flex">
-                <Organisms user={user} organisms={organisms} setOrganisms={setOrganisms} setOrganismIdToEdit={setOrganismIdToEdit} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm} modal={modal} setModal={setModal} setShowOrganismName={setShowOrganismName}/>
+                <Organisms user={user} organisms={organisms} setOrganisms={setOrganisms} setOrganismIdToEdit={setOrganismIdToEdit} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm} modal={modal} setModal={setModal}/>
             </div>
             <OrganismForm user={user} organisms={organisms} setOrganisms={setOrganisms} organismIdToEdit={organismIdToEdit} organismNameToEdit={organismNameToEdit} setOrganismNameToEdit={setOrganismNameToEdit} organismSpeciesToEdit={organismSpeciesToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} organismForm={organismForm} setOrganismForm={setOrganismForm} modal={modal} setModal={setModal}/>
         </div>

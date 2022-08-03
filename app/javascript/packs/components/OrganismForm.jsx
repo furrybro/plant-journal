@@ -35,11 +35,15 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
             body: formData
         })
             .then(result => result.json())
-            .then(() => fetch(`/api/v1/organisms/${user.id}`))
+            .then(() => fetch(`/api/v1/organisms/get_by_user/${user.id}`))
             .then(result => result.json())
             .then(result => setOrganisms(result));
 
         e.target.reset();
+
+        setNewOrganismName("");
+        setNewOrganismSpecies("");
+        setNewOrganismPhoto(null);
     }
 
     function changeName(e) {
@@ -69,7 +73,7 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
             body: JSON.stringify(editOrgObj)
         })
             .then(result => result.json())
-            .then(() => fetch(`/api/v1/organisms/${user.id}`))
+            .then(() => fetch(`/api/v1/organisms/get_by_user/${user.id}`))
             .then(result => result.json())
             .then(result => setOrganisms(result));
 

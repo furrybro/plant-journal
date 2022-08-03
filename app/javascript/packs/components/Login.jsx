@@ -55,12 +55,13 @@ function Login({ setUser }) {
     }
 
     return (
-        <div className="formdiv" style={{ fontFamily: 'Poppins' }}>
-            <Form className="form" onSubmit={handleSubmit}>
+        <div className="full-width d-flex justify-content-center align-items-center" style={{ fontFamily: 'Poppins' }}>
+            <Form className="formdiv rounded p-4 p-sm-4" onSubmit={handleSubmit}>
                 <h1 className="header">LOGIN</h1>
                 <FormGroup>
-                    <Label htmlFor="username">Username:</Label>
+                    <Label for="username">Username:</Label>
                     <Input
+                        className="form-control"
                         type="text"
                         id="username"
                         autoComplete="off"
@@ -72,8 +73,9 @@ function Login({ setUser }) {
                     </p>
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="password">Password:</Label>
+                    <Label for="password">Password:</Label>
                     <Input
+                        className="form-control"
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -90,7 +92,7 @@ function Login({ setUser }) {
                 <Button type="submit">Login</Button>
                 <br></br>
                 <br></br>
-                <FormText>
+                <FormText color="black">
                     New to us? <a href="/signup">Sign up here.</a>
                 </FormText>
             </Form>

@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       resources :organisms
       resources :users
       resources :sessions
+
+      get "/organisms/get_by_user/:id", to: "organisms#get_by_user"
+
+      get "/entries/get_by_organism/:id", to: "entries#get_by_organism"
       # Route for login after signup
       post "/login", to: "sessions#create"
       delete "/logout", to: "sessions#destroy"

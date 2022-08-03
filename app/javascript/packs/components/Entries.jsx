@@ -6,7 +6,7 @@ import { DateTime } from "luxon";
 import { useParams } from "react-router-dom";
 import AddEntryCard from "./AddEntryCard";
 
-function Entries({ entryForm, setEntryForm }) {
+function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
     const [entries, setEntries] = useState([]);
     const [noteToEdit, setNoteToEdit] = useState("");
     const [dateToEdit, setDateToEdit] = useState(DateTime.now());
@@ -19,9 +19,13 @@ function Entries({ entryForm, setEntryForm }) {
     const editToggle = () => setEntryForm(!entryForm);
 
     useEffect(() => {
-        fetch(`/api/v1/entries/${organismId}`)
+        fetch(`/api/v1/entries/get_by_organism/${organismId}`)
             .then(result => result.json())
             .then(result => setEntries(result));
+
+        fetch(`/api/v1/organisms/${organismId}`)
+            .then(result => result.json())
+            .then(result => setShowOrganismName(`${result.name} the ${result.species}`));
     }, []);
 
     function changeNote(e) {
@@ -52,7 +56,7 @@ function Entries({ entryForm, setEntryForm }) {
             body: JSON.stringify(editEntryObj)
         })
             .then(result => result.json())
-            .then(() => fetch(`/api/v1/entries/${organismId}`))
+            .then(() => fetch(`/api/v1/entries/get_by_organism/${organismId}`))
             .then(result => result.json())
             .then(result => setEntries(result));
 

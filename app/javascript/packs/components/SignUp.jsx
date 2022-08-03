@@ -60,63 +60,67 @@ function SignUp({ setUser }) {
 
 	if (errors.postErrors !== undefined) {
 		renderEachError = errors.postErrors.map((error) => {
-			return <p style={{ color: "red" }}>{error}</p>
+			return <p style={{ color: "red", fontWeight: "bold" }}>{error}</p>
 		});
 	}
 
 	return (
-		<div className="formdiv" style={{ fontFamily: 'Poppins' }}>
-			<Form className="form" onSubmit={handleSubmit}>
-				<h2 className="header">SIGN UP</h2>
+		<div className="full-width d-flex justify-content-center align-items-center" style={{ fontFamily: 'Poppins' }}>
+			<Form className="formdiv rounded p-4 p-sm-4" onSubmit={handleSubmit}>
+				<h2 className="header" style={{ fontSize: '48px', textAlign: 'center', fontWeight: '800' }}>SIGN UP</h2>
 				<FormGroup>
-					<Label htmlFor="newusername">Username:</Label>
+					<Label for="newusername">Username:</Label>
 					<Input
+						className="form-control"
 						type="text"
 						name="username"
 						id="newusername"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
-						placeholder="gardener4eva"
+						placeholder="plants4lyfe"
 					/>
-					<p style={{ color: "red" }}>
+					<p style={{ color: "red", fontWeight: "bold" }}>
 						{errors.username}
 					</p>
 				</FormGroup>
 				<FormGroup>
-					<Label htmlFor="newemail">Email:</Label>
+					<Label for="newemail">Email:</Label>
 					<Input
+						className="form-control"
 						type="email"
 						id="newemail"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
-						placeholder="example@example.com"
+						placeholder="queenbee@garden.com"
 					/>
 				</FormGroup>
 				<FormGroup>
-					<Label htmlFor="password">Password:</Label>
+					<Label for="password">Password:</Label>
 					<Input
+						className="form-control"
 						type="password"
 						id="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
-						placeholder="********"
+						placeholder="******"
 					/>
 				</FormGroup>
 				<FormGroup>
-					<Label htmlFor="password_confirmation">Confirm Password:</Label>
+					<Label for="password_confirmation">Confirm Password:</Label>
 					<Input
+						className="form-control"
 						type="password"
 						id="password_confirmation"
 						value={passwordConfirmation}
 						onChange={(e) => setPasswordConfirmation(e.target.value)}
-						placeholder="********"
+						placeholder="******"
 					/>
 				</FormGroup>
 				{renderEachError}
 				<Button>Submit</Button>
 				<br></br>
 				<br></br>
-				<FormText>
+				<FormText color="black">
 					Already have an account? <a href="/login">Login here.</a>
 				</FormText>
 			</Form>

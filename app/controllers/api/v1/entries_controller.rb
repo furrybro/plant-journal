@@ -9,6 +9,11 @@ class Api::V1::EntriesController < ApplicationController
 
   # GET /entries/1 or /entries/1.json
   def show
+    entry = find_entry
+    render json: entry, status: :ok
+  end
+
+  def get_by_organism
     entry = Entry.where(organism_id: params[:id]).order(:date)
     render json: entry
   end
