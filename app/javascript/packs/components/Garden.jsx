@@ -18,7 +18,7 @@ function Garden({ user, setShowOrganismName }) {
     }, []);
 
     return (
-        <div >
+        <div>
             <div className="d-flex">
                 <Organisms user={user} organisms={organisms} setOrganisms={setOrganisms} setOrganismIdToEdit={setOrganismIdToEdit} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm} modal={modal} setModal={setModal}/>
             </div>

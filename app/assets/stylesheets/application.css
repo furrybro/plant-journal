@@ -47,37 +47,6 @@ label {
     text-align: center;
   }
 
-/* .container {
-   display: flex;
-   flex-wrap: column wrap;
-   justify-content: center;
-   align-items: center;
-   flex-direction: column;
-   overflow: auto;
-   position: sticky;
-} */
-
-/* .orgcard {
-   flex-grow: 1;
-   flex-basis: 16%;
-   display: flex;
-   position: absolute;
-   top: 180px;
-} */
-
-/* .orgformdiv {
-   border: 2px solid #d3d3d3;
-   border-radius: .5em;
-   margin-bottom: 1em;
-   margin-left: auto;
-   margin-right: auto;
-   margin-top: 50px;
-   padding: 1em;
-   text-align: left;
-   width: 400px;    
-   background-color: rgba(176, 202, 148, 0.958);
-} */
-
 .entryformdiv {
    border: 2px solid #d3d3d3;
    border-radius: .5em;
@@ -87,3 +56,5 @@ label {
    width: 400px;    
    background-color: rgba(176, 202, 148, 0.958);
 }
+
+

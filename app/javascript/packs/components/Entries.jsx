@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import cactus from "/app/assets/images/cactus";
 
 
-function Entries({ entryForm, setEntryForm, setShowOrganismName, setShowOrganismSpecies }) {
+function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
     const [entries, setEntries] = useState([]);
     const [noteToEdit, setNoteToEdit] = useState("");
     const [dateToEdit, setDateToEdit] = useState(DateTime.now());
@@ -33,7 +33,7 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName, setShowOrganism
     }
 
     function changeDate(e) {
-        let newDate = DateTime.fromFormat(e.target.value, "yyyy-MM-dd'T'T")
+        let newDate = DateTime.fromFormat(e.target.value, "yyyy-MM-dd'T'T");
         setDateToEdit(newDate);
     }
 

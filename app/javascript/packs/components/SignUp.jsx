@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Input, Label, FormText } from "reactstrap";
-import { useForm } from "react-hook-form";
-import { render } from "react-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignUp({ setUser }) {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [passwordConfirmation, setPasswordConfirmation] = useState("");
-	const [errors, setErrors] = useState({})
+	const [errors, setErrors] = useState({});
+	const navigate = useNavigate();
 
 	function sendSignupPostRequest() {
 		fetch("/api/v1/signup", {
@@ -25,6 +25,7 @@ function SignUp({ setUser }) {
 		}).then((r) => {
 			if (r.ok) {
 				r.json().then((user) => setUser(user));
+				navigate("/");
 			} else {
 				r.json().then((r) => setErrors({ postErrors: r.error }));
 			}
@@ -43,9 +44,9 @@ function SignUp({ setUser }) {
 	}
 
 	function validate() {
-		const validationErrors = {}
+		const validationErrors = {};
 		if (username.length === 0) {
-			validationErrors.username = "Username cannot be empty";
+			validationErrors.username = "Username cannot be blank";
 		}
 
 		const isValid = Object.keys(validationErrors).length === 0;

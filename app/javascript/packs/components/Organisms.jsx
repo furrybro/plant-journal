@@ -2,10 +2,9 @@ import React from "react";
 import OrganismCard from "./OrganismCard";
 import { Card, Col, Row, Container, CardBody, Button, CardImg, CardTitle, CardSubtitle } from "reactstrap";
 import cactus from "/app/assets/images/cactus";
+import AddOrganismCard from "./AddOrganismCard";
 
 function Organisms({ user, organisms, setOrganisms, setOrganismIdToEdit, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm, modal, setModal }) {
-
-    const toggle = () => setModal(!modal);
 
     const renderEachOrganism = organisms.map((organism) => {
         if (organism.featured_image === null) {
@@ -16,27 +15,21 @@ function Organisms({ user, organisms, setOrganisms, setOrganismIdToEdit, setOrga
         }
     })
 
+    const numRequired = 2;
+    let numExtraFormCards = Math.max(numRequired - organisms.length, 0);
+
+    let renderPlaceholderOrgCard = [];
+
+    for (let i=0; i < numExtraFormCards; i++) {
+        renderPlaceholderOrgCard.push(<AddOrganismCard modal={modal} setModal={setModal}/>)
+    }
+
     return (
         <Container>
             <Row className="g-3">
                 {renderEachOrganism}
-                <Col className="col-12 col-md-6 col-lg-4">
-                    <Card style={{ fontFamily: 'Poppins' }}>
-                        <CardImg
-                            alt="plant image placeholder"
-                            src={cactus}
-                            top
-                            style={{ height: '35vh', objectFit: 'cover' }}
-                            width="100%"
-                        />
-                        <CardBody>
-                            <CardTitle tag="h4">Plant Name</CardTitle>
-                            <CardSubtitle tag="h6">Plant Species</CardSubtitle>
-                            <br></br>
-                            <Button style={{ float: 'right' }} onClick={toggle}>add new plant +</Button>
-                        </CardBody>
-                    </Card>
-                </Col>
+                {renderPlaceholderOrgCard}
+                <AddOrganismCard modal={modal} setModal={setModal}/>
             </Row>
         </Container>
     );
