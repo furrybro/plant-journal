@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { Button, Card, CardBody, CardTitle, Col, CardSubtitle, CardImg, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
-function OrganismCard({ user, name, species, image, organismId, setOrganismIdToEdit, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm }) {
+function OrganismCard({ user, name, species, image, organismId, setOrganismIdToEdit, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm, setShowOrganismName }) {
 
     function handleDeleteOrganism(e) {
         fetch(`/api/v1/organisms/${organismId}`, {
@@ -20,6 +20,10 @@ function OrganismCard({ user, name, species, image, organismId, setOrganismIdToE
         setOrganismForm(true);
     }
 
+    function sendOrganismNameToShow(e) {
+        setShowOrganismName(`${e.target.name} the ${e.target.title}`);
+    }
+
     return (
         <Col className="col-12 col-md-6 col-lg-4">
             <Card style={{ fontFamily: 'Poppins' }}>
@@ -35,7 +39,7 @@ function OrganismCard({ user, name, species, image, organismId, setOrganismIdToE
                     <CardSubtitle tag="h6">{species}</CardSubtitle>
                     <br></br>
                     <Link to={`/entries/${organismId}`}>
-                        <Button value={organismId}>see entries</Button>
+                        <Button onClick={sendOrganismNameToShow} name={name} title={species} value={organismId}>see entries</Button>
                     </Link>
                     <UncontrolledButtonDropdown style={{ float: 'right' }}>
                         <DropdownToggle style={{ borderRadius: '8px' }}>

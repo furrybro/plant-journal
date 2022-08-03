@@ -32,7 +32,6 @@ function App() {
             <NavBar user={user} setUser={setUser} showOrganismName={showOrganismName}/>
             <div className="bg-image d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${succulent})`, height: '100vh', backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
                 <div style={{ maxHeight: '80vh', overflow: 'auto' }}>
-                    {/* <main> */}
                         {user ? (
                             <Routes>
                                 <Route path="/" element={<Garden user={user} setShowOrganismName={setShowOrganismName}/>} />
@@ -46,7 +45,6 @@ function App() {
                                 <Route path="/entries/:organism_id" element={<Entries entryForm={entryForm} setEntryForm={setEntryForm} setShowOrganismName={setShowOrganismName}/>} />
                             </Routes>
                         )}
-                    {/* </main> */}
                 </div>
             </div>
         </BrowserRouter>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, CardImg, CardSubtitle, CardText, CardBody, Container, Row, Col, Modal, Form, FormGroup, Input, Label, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { Card, Button, CardImg, CardSubtitle, CardText, CardBody, Container, Row, Col, Modal, Form, FormGroup, Input, Label } from "reactstrap";
 import EntryForm from "./EntryForm";
+import EntryCard from "./EntryCard";
 import { DateTime } from "luxon";
 import { useParams } from "react-router-dom";
 import cactus from "/app/assets/images/cactus";
 
-
-function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
+function Entries({ entryForm, setEntryForm }) {
     const [entries, setEntries] = useState([]);
     const [noteToEdit, setNoteToEdit] = useState("");
     const [dateToEdit, setDateToEdit] = useState(DateTime.now());
@@ -14,7 +14,7 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
     const [modal, setModal] = useState(false);
 
     const organismId = useParams().organism_id;
-
+  
     const toggle = () => setModal(!modal);
     const editToggle = () => setEntryForm(!entryForm);
 
@@ -23,7 +23,7 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
             .then(result => result.json())
             .then(result => {
                 setEntries(result);
-                setShowOrganismName(`${result[0].organism.name} the ${result[0].organism.species}`);
+                // setShowOrganismName(`${result[0].organism.name} the ${result[0].organism.species}`);
             });
     }, []);
 
@@ -69,86 +69,12 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
         let entryDate = DateTime.fromISO(entry.date);
         let formatDate = entryDate.toLocaleString(DateTime.DATETIME_FULL);
 
-        function handleDeleteEntry(e) {
-            fetch(`/api/v1/entries/${e.target.value}`, {
-                method: "DELETE"
-            })
-                .then(() => fetch(`/api/v1/entries/${organismId}`))
-                .then(result => result.json())
-                .then(result => setEntries(result));
-        }
-
-        function handleEditEntry() {
-            setNoteToEdit(entry.note);
-            setDateToEdit(entryDate);
-            setEntryId(entry.id);
-            setEntryForm(true);
-        }
-
         if (entry.entry_image === null) {
-            return (
-                <Col className="col-12 col-md-6 col-lg-4" key={entry.id}>
-                    <Card style={{ fontFamily: 'Poppins' }}>
-                        <CardImg
-                            alt="entry image placeholder"
-                            src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"
-                            top
-                            style={{ height: '35vh', objectFit: 'cover' }}
-                            width="100%"
-                        />
-                        <CardBody>
-                            <CardSubtitle style={{ fontWeight: 'bold' }}>{formatDate}</CardSubtitle>
-                            <CardText style={{ height: '45px', overflow: 'auto', maxHeight: '45px' }}>{entry.note}</CardText>
-                            <UncontrolledButtonDropdown style={{ float: 'right' }}>
-                                <DropdownToggle style={{ borderRadius: '8px' }}>
-                                    ☰
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem onClick={handleEditEntry}>
-                                        edit entry
-                                    </DropdownItem>
-                                    <DropdownItem value={entry.id} onClick={handleDeleteEntry}>
-                                        delete entry
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledButtonDropdown>
-                        </CardBody>
-                    </Card>
-                </Col>
-            );
+            return <EntryCard key={entry.id} entryId={entry.id} setEntries={setEntries} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} organismId={organismId}/>
         } else {
-            return (
-                <Col className="col-12 col-md-6 col-lg-4" key={entry.id}>
-                    <Card style={{ fontFamily: 'Poppins' }}>
-                        <CardImg
-                            alt="entry image placeholder"
-                            src={entry.entry_image.url !== undefined ? entry.entry_image.url : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"}
-                            top
-                            style={{ height: '35vh', objectFit: 'cover' }}
-                            width="100%"
-                        />
-                        <CardBody>
-                            <CardSubtitle style={{ fontWeight: 'bold' }}>{formatDate}</CardSubtitle>
-                            <CardText style={{ height: '45px', overflow: 'auto', maxHeight: '45px' }}>{entry.note}</CardText>
-                            <UncontrolledButtonDropdown style={{ float: 'right' }}>
-                                <DropdownToggle style={{ borderRadius: '8px' }}>
-                                    ☰
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem onClick={handleEditEntry}>
-                                        edit entry
-                                    </DropdownItem>
-                                    <DropdownItem value={entry.id} onClick={handleDeleteEntry}>
-                                        delete entry
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledButtonDropdown>
-                        </CardBody>
-                    </Card>
-                </Col>
-            );
+            return <EntryCard key={entry.id} entryId={entry.id} setEntries={setEntries} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} image={entry.entry_image.url} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} organismId={organismId}/>
         }
-    });
+    })
 
     return (
         <div>
