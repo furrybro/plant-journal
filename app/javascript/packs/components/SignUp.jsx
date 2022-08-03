@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Input, Label, FormText } from "reactstrap";
 import { useForm } from "react-hook-form";
+import { render } from "react-dom";
 
 function SignUp({ setUser }) {
 	const [username, setUsername] = useState("");
@@ -54,6 +55,14 @@ function SignUp({ setUser }) {
 		}
 	}
 
+	let renderEachError = null;
+
+	if (errors.postErrors !== undefined) {
+		renderEachError = errors.postErrors.map((error) => {
+			return <p style={{ color: "red" }}>{error}</p>
+		});
+	}
+
 	return (
 		<div className="formdiv" style={{ fontFamily: 'Poppins' }}>
 			<Form className="form" onSubmit={handleSubmit}>
@@ -65,12 +74,12 @@ function SignUp({ setUser }) {
 						name="username"
 						id="newusername"
 						value={username}
-						onChange={(e) => setUsername(e.target.value)}						
+						onChange={(e) => setUsername(e.target.value)}
 						placeholder="gardener4eva"
 					/>
-                    <p style={{ color: "red" }}>
-                        {errors.username}
-                    </p>
+					<p style={{ color: "red" }}>
+						{errors.username}
+					</p>
 				</FormGroup>
 				<FormGroup>
 					<Label htmlFor="newemail">Email:</Label>
@@ -102,15 +111,13 @@ function SignUp({ setUser }) {
 						placeholder="********"
 					/>
 				</FormGroup>
-				<p style={{ color: "red" }}>
-					{errors.postErrors}
-				</p>
+				{renderEachError}
 				<Button>Submit</Button>
 				<br></br>
 				<br></br>
-                <FormText>
-                    Already have an account? <a href="/login">Login here.</a>
-                </FormText>
+				<FormText>
+					Already have an account? <a href="/login">Login here.</a>
+				</FormText>
 			</Form>
 		</div>
 	);
