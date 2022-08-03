@@ -5,7 +5,6 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
     const [newOrganismName, setNewOrganismName] = useState("");
     const [newOrganismSpecies, setNewOrganismSpecies] = useState("");
     const [newOrganismPhoto, setNewOrganismPhoto] = useState(null);
-    const [errors, setErrors] = useState({});
 
     const toggle = () => setModal(!modal);
     const editToggle = () => setOrganismForm(!organismForm);
@@ -34,19 +33,11 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
         fetch("/api/v1/organisms", {
             method: "POST",
             body: formData
-        }).then((r) => {
-            if (r.ok) {
-                r.json().then(() => fetch(`/api/v1/organisms/${user.id}`))
-                .then(result => result.json())
-                .then(result => setOrganisms(result));
-            } else {
-                r.json().then((r) => console.log(r, "this is r"))
-            }
         })
-            // .then(result => result.json())
-            // .then(() => fetch(`/api/v1/organisms/${user.id}`))
-            // .then(result => result.json())
-            // .then(result => setOrganisms(result));
+            .then(result => result.json())
+            .then(() => fetch(`/api/v1/organisms/${user.id}`))
+            .then(result => result.json())
+            .then(result => setOrganisms(result));
 
         e.target.reset();
     }
@@ -90,7 +81,6 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
 
     return (
         <div>
-            {/* <Button onClick={toggle}>Add new plant</Button> */}
             <Modal centered isOpen={modal} toggle={toggle}>
                 <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em', fontFamily: 'Poppins'}} onSubmit={addNewOrganism}>
                     <FormGroup>
