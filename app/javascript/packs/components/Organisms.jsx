@@ -19,7 +19,7 @@ function Organisms({ user, organisms, setOrganisms, setOrganismIdToEdit, setOrga
     let renderPlaceholderOrgCard = [];
 
     for (let i=0; i < numExtraFormCards; i++) {
-        renderPlaceholderOrgCard.push(<AddOrganismCard modal={modal} setModal={setModal}/>)
+        renderPlaceholderOrgCard.push(<AddOrganismCard modal={modal} setModal={setModal}/>);
     }
 
     return (

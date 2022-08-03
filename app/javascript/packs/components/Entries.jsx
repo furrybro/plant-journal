@@ -5,6 +5,7 @@ import EntryCard from "./EntryCard";
 import { DateTime } from "luxon";
 import { useParams } from "react-router-dom";
 import cactus from "/app/assets/images/cactus";
+import AddEntryCard from "./AddEntryCard";
 
 function Entries({ entryForm, setEntryForm }) {
     const [entries, setEntries] = useState([]);
@@ -21,10 +22,7 @@ function Entries({ entryForm, setEntryForm }) {
     useEffect(() => {
         fetch(`/api/v1/entries/${organismId}`)
             .then(result => result.json())
-            .then(result => {
-                setEntries(result);
-                // setShowOrganismName(`${result[0].organism.name} the ${result[0].organism.species}`);
-            });
+            .then(result => setEntries(result));
     }, []);
 
     function changeNote(e) {
@@ -74,29 +72,24 @@ function Entries({ entryForm, setEntryForm }) {
         } else {
             return <EntryCard key={entry.id} entryId={entry.id} setEntries={setEntries} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} image={entry.entry_image.url} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} organismId={organismId}/>
         }
-    })
+    });
+
+    const numRequired = 2;
+    let numExtraFormCards = Math.max(numRequired - entries.length, 0);
+
+    let renderPlaceholderEntryCard = [];
+
+    for (let i=0; i < numExtraFormCards; i++) {
+        renderPlaceholderEntryCard.push(<AddEntryCard modal={modal} setModal={setModal}/>);
+    }
 
     return (
         <div>
             <Container>
                 <Row className="g-3">
                     {renderEachEntry}
-                    <Col className="col-12 col-md-6 col-lg-4">
-                        <Card style={{ fontFamily: 'Poppins' }}>
-                            <CardImg
-                                alt="plant image placeholder"
-                                src={cactus}
-                                top
-                                style={{ height: '35vh', objectFit: 'cover' }}
-                                width="100%"
-                            />
-                            <CardBody>
-                                <CardSubtitle style={{ fontWeight: 'bold' }}>New Entry Date</CardSubtitle>
-                                <CardText style={{ height: '45px', overflowY: 'auto', maxHeight: '45px' }}>New Entry</CardText>
-                                <Button style={{ float: 'right' }} onClick={toggle}>add new entry +</Button>
-                            </CardBody>
-                        </Card>
-                    </Col>
+                    {renderPlaceholderEntryCard}
+                    <AddEntryCard modal={modal} setModal={setModal}/>
                 </Row>
                 <Modal centered isOpen={modal} toggle={toggle}>
                     <EntryForm organismId={organismId} setEntries={setEntries} modal={modal} setModal={setModal} />
