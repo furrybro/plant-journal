@@ -18,7 +18,7 @@ function NavBar({ user, setUser, showOrganismName }) {
     return (
         <div>
             {user ? (
-                <Nav className="navbar navbar-expand-md" style={{ backgroundColor: 'rgba(176, 202, 148)', fontFamily: 'Poppins' }}>
+                <Nav className="navbar navbar-expand-md fixed-top" style={{ backgroundColor: 'rgba(176, 202, 148)', fontFamily: 'Poppins' }}>
                     <div className="container-fluid">
                           <NavbarBrand>THE PLANT JOURNAL</NavbarBrand>
                           {showOrganismName ? (<NavItem>{showOrganismName}</NavItem>) : (null)}

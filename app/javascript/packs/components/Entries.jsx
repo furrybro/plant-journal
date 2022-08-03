@@ -88,7 +88,7 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName, setShowOrganism
         if (entry.entry_image === null) {
             return (
                 <Col className="col-12 col-md-6 col-lg-4" key={entry.id}>
-                    <Card style={{ height: '438.72px', fontFamily: 'Poppins' }}>
+                    <Card style={{ fontFamily: 'Poppins' }}>
                         <CardImg
                             alt="entry image placeholder"
                             src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"
@@ -119,7 +119,7 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName, setShowOrganism
         } else {
             return (
                 <Col className="col-12 col-md-6 col-lg-4" key={entry.id}>
-                    <Card style={{ height: '438.72px', fontFamily: 'Poppins' }}>
+                    <Card style={{ fontFamily: 'Poppins' }}>
                         <CardImg
                             alt="entry image placeholder"
                             src={entry.entry_image.url !== undefined ? entry.entry_image.url : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"}
@@ -156,7 +156,7 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName, setShowOrganism
                 <Row className="g-3">
                     {renderEachEntry}
                     <Col className="col-12 col-md-6 col-lg-4">
-                        <Card style={{ minWidth: '300px', height: '438.72px', fontFamily: 'Poppins' }}>
+                        <Card style={{ fontFamily: 'Poppins' }}>
                             <CardImg
                                 alt="plant image placeholder"
                                 src={cactus}

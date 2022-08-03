@@ -7,9 +7,9 @@ function SignUp({ setUser }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [passwordConfirmation, setPasswordConfirmation] = useState("");
+	const [errors, setErrors] = useState({})
 
-	function handleSubmit(e) {
-		e.preventDefault();
+	function sendSignupPostRequest() {
 		fetch("/api/v1/signup", {
 			method: "POST",
 			headers: {
@@ -24,8 +24,34 @@ function SignUp({ setUser }) {
 		}).then((r) => {
 			if (r.ok) {
 				r.json().then((user) => setUser(user));
+			} else {
+				r.json().then((r) => setErrors({ postErrors: r.error }));
 			}
 		});
+	}
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		const { isValid, validationErrors } = validate();
+		if (isValid) {
+			setErrors({});
+			sendSignupPostRequest();
+		} else {
+			setErrors(validationErrors);
+		}
+	}
+
+	function validate() {
+		const validationErrors = {}
+		if (username.length === 0) {
+			validationErrors.username = "Username cannot be empty";
+		}
+
+		const isValid = Object.keys(validationErrors).length === 0;
+		return {
+			isValid,
+			validationErrors,
+		}
 	}
 
 	return (
@@ -42,6 +68,9 @@ function SignUp({ setUser }) {
 						onChange={(e) => setUsername(e.target.value)}						
 						placeholder="gardener4eva"
 					/>
+                    <p style={{ color: "red" }}>
+                        {errors.username}
+                    </p>
 				</FormGroup>
 				<FormGroup>
 					<Label htmlFor="newemail">Email:</Label>
@@ -73,6 +102,9 @@ function SignUp({ setUser }) {
 						placeholder="********"
 					/>
 				</FormGroup>
+				<p style={{ color: "red" }}>
+					{errors.postErrors}
+				</p>
 				<Button>Submit</Button>
 				<br></br>
 				<br></br>

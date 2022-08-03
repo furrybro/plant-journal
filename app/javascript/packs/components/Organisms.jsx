@@ -21,7 +21,7 @@ function Organisms({ user, organisms, setOrganisms, setOrganismIdToEdit, setOrga
             <Row className="g-3">
                 {renderEachOrganism}
                 <Col className="col-12 col-md-6 col-lg-4">
-                    <Card style={{ minWidth: '280px', height: '438.72px', fontFamily: 'Poppins' }}>
+                    <Card style={{ fontFamily: 'Poppins' }}>
                         <CardImg
                             alt="plant image placeholder"
                             src={cactus}
