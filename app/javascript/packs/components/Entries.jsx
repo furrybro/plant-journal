@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, CardImg, CardSubtitle, CardText, CardBody, Container, Row, Col, Modal, Form, FormGroup, Input, Label } from "reactstrap";
+import { Button, Container, Row, Modal, Form, FormGroup, Input, Label } from "reactstrap";
 import EntryForm from "./EntryForm";
 import EntryCard from "./EntryCard";
 import { DateTime } from "luxon";
 import { useParams } from "react-router-dom";
-import cactus from "/app/assets/images/cactus";
 import AddEntryCard from "./AddEntryCard";
 
 function Entries({ entryForm, setEntryForm }) {

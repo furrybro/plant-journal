@@ -5,6 +5,7 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
     const [newOrganismName, setNewOrganismName] = useState("");
     const [newOrganismSpecies, setNewOrganismSpecies] = useState("");
     const [newOrganismPhoto, setNewOrganismPhoto] = useState(null);
+    const [errors, setErrors] = useState({});
 
     const toggle = () => setModal(!modal);
     const editToggle = () => setOrganismForm(!organismForm);
@@ -33,11 +34,19 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
         fetch("/api/v1/organisms", {
             method: "POST",
             body: formData
+        }).then((r) => {
+            if (r.ok) {
+                r.json().then(() => fetch(`/api/v1/organisms/${user.id}`))
+                .then(result => result.json())
+                .then(result => setOrganisms(result));
+            } else {
+                r.json().then((r) => console.log(r, "this is r"))
+            }
         })
-            .then(result => result.json())
-            .then(() => fetch(`/api/v1/organisms/${user.id}`))
-            .then(result => result.json())
-            .then(result => setOrganisms(result));
+            // .then(result => result.json())
+            // .then(() => fetch(`/api/v1/organisms/${user.id}`))
+            // .then(result => result.json())
+            // .then(result => setOrganisms(result));
 
         e.target.reset();
     }
@@ -96,7 +105,7 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
                         <Label>Photo:</Label>
                         <Input onChange={handleNewOrgPhoto} type="file" accept="image/*" placeholder="Upload photo here"></Input>
                     </FormGroup>
-                    <Button onClick={toggle} type="submit">Add new plant</Button>
+                    <Button onClick={toggle} type="submit" disabled={!newOrganismName || !newOrganismSpecies || !newOrganismPhoto}>Add new plant</Button>
                 </Form>
             </Modal>
             <Modal centered isOpen={organismForm} toggle={editToggle}>
