@@ -3,4 +3,6 @@ class Organism < ApplicationRecord
     has_many :entries, dependent: :destroy
 
     has_one_attached :featured_image
+
+    validates :name, :species, :user_id, presence: true
 end
