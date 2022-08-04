@@ -3,13 +3,13 @@ import OrganismCard from "./OrganismCard";
 import { Row, Container } from "reactstrap";
 import AddOrganismCard from "./AddOrganismCard";
 
-function Organisms({ user, organisms, setOrganisms, setOrganismIdToEdit, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm, modal, setModal, setShowOrganismName }) {
+function Organisms({ user, organisms, setOrganisms, setOrganismIdToEdit, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm, modal, setModal, setShowOrganismName, deleteModal, setDeleteModal }) {
 
     const renderEachOrganism = organisms.map((organism) => {
         if (organism.featured_image === null) {
-            return <OrganismCard key={organism.id} user={user} name={organism.name} species={organism.species} organism={organism} organismId={organism.id} setOrganismIdToEdit={setOrganismIdToEdit} organisms={organisms} setOrganisms={setOrganisms} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm} setShowOrganismName={setShowOrganismName}/>
+            return <OrganismCard key={organism.id} user={user} name={organism.name} species={organism.species} organism={organism} organismId={organism.id} setOrganismIdToEdit={setOrganismIdToEdit} organisms={organisms} setOrganisms={setOrganisms} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm} setShowOrganismName={setShowOrganismName} deleteModal={deleteModal} setDeleteModal={setDeleteModal}/>
         } else {
-            return <OrganismCard key={organism.id} user={user} name={organism.name} species={organism.species} image={organism.featured_image.url} organismId={organism.id} setOrganismIdToEdit={setOrganismIdToEdit} organisms={organisms} setOrganisms={setOrganisms} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm} setShowOrganismName={setShowOrganismName}/>
+            return <OrganismCard key={organism.id} user={user} name={organism.name} species={organism.species} image={organism.featured_image.url} organismId={organism.id} setOrganismIdToEdit={setOrganismIdToEdit} organisms={organisms} setOrganisms={setOrganisms} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm} setShowOrganismName={setShowOrganismName} deleteModal={deleteModal} setDeleteModal={setDeleteModal}/>
         }
     });
 

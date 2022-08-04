@@ -2,22 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, CardBody, CardTitle, Col, CardSubtitle, CardImg, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
-function OrganismCard({ user, name, species, image, organismId, setOrganismIdToEdit, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm }) {
-
-    function handleDeleteOrganism(e) {
-        fetch(`/api/v1/organisms/${organismId}`, {
-            method: "DELETE"
-        })
-            .then(() => fetch(`/api/v1/organisms/get_by_user/${user.id}`))
-            .then(result => result.json())
-            .then(result => setOrganisms(result));
-    }
+function OrganismCard({ user, name, species, image, organismId, setOrganismIdToEdit, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm, deleteModal, setDeleteModal }) {
 
     function sendOrganismToEdit(e) {
         setOrganismNameToEdit(e.target.value);
         setOrganismSpeciesToEdit(e.target.title);
         setOrganismIdToEdit(e.target.name);
         setOrganismForm(true);
+    }
+
+    function sendOrganismToDelete(e) {
+        setOrganismIdToEdit(e.target.value);
+        setDeleteModal(!deleteModal);
     }
 
     return (
@@ -45,7 +41,7 @@ function OrganismCard({ user, name, species, image, organismId, setOrganismIdToE
                             <DropdownItem value={name} title={species} name={organismId} onClick={sendOrganismToEdit}>
                                 edit plant
                             </DropdownItem>
-                            <DropdownItem value={organismId} onClick={handleDeleteOrganism}>
+                            <DropdownItem value={organismId} onClick={sendOrganismToDelete}>
                                 plant died :(
                             </DropdownItem>
                         </DropdownMenu>

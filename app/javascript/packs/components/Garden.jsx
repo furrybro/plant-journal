@@ -9,6 +9,7 @@ function Garden({ user, setShowOrganismName }) {
     const [organismForm, setOrganismForm] = useState(false);
     const [modal, setModal] = useState(false);
     const [organismIdToEdit, setOrganismIdToEdit] = useState();
+    const [deleteModal, setDeleteModal] = useState(false);
 
     useEffect(() => {
         fetch(`/api/v1/organisms/get_by_user/${user.id}`)
@@ -20,9 +21,9 @@ function Garden({ user, setShowOrganismName }) {
     return (
         <div>
             <div className="d-flex">
-                <Organisms user={user} organisms={organisms} setOrganisms={setOrganisms} setOrganismIdToEdit={setOrganismIdToEdit} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm} modal={modal} setModal={setModal}/>
+                <Organisms user={user} organisms={organisms} setOrganisms={setOrganisms} setOrganismIdToEdit={setOrganismIdToEdit} setOrganismNameToEdit={setOrganismNameToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} setOrganismForm={setOrganismForm} modal={modal} setModal={setModal} deleteModal={deleteModal} setDeleteModal={setDeleteModal}/>
             </div>
-            <OrganismForm user={user} organisms={organisms} setOrganisms={setOrganisms} organismIdToEdit={organismIdToEdit} organismNameToEdit={organismNameToEdit} setOrganismNameToEdit={setOrganismNameToEdit} organismSpeciesToEdit={organismSpeciesToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} organismForm={organismForm} setOrganismForm={setOrganismForm} modal={modal} setModal={setModal}/>
+            <OrganismForm user={user} organisms={organisms} setOrganisms={setOrganisms} organismIdToEdit={organismIdToEdit} organismNameToEdit={organismNameToEdit} setOrganismNameToEdit={setOrganismNameToEdit} organismSpeciesToEdit={organismSpeciesToEdit} setOrganismSpeciesToEdit={setOrganismSpeciesToEdit} organismForm={organismForm} setOrganismForm={setOrganismForm} modal={modal} setModal={setModal} deleteModal={deleteModal} setDeleteModal={setDeleteModal}/>
         </div>
     );
 }

@@ -11,11 +11,11 @@ User.destroy_all
 Organism.destroy_all
 Entry.destroy_all
 
-jane = User.create(username: "Jane", email: "jane@gmail.com", password: "jane123", password_confirmation: "jane123")
+jeena = User.create(username: "Jeena", email: "jeena@gmail.com", password: "jeena123", password_confirmation: "jeena123")
 john = User.create(username: "John", email: "john@gmail.com", password: "john123", password_confirmation: "john123")
 
-monstera = Organism.create(name: "Monstera", species: "Monstera Deliciosa", user_id: jane.id)
-snake = Organism.create(name: "Sassy", species: "Snake Plant", user_id: jane.id)
+monstera = Organism.create(name: "Monstera", species: "Monstera Deliciosa", user_id: jeena.id)
+snake = Organism.create(name: "Sassy", species: "Snake Plant", user_id: jeena.id)
 bamboo = Organism.create(name: "Bambi", species: "Bamboo", user_id: john.id)
 aloe = Organism.create(name: "Alex", species: "Aloe Vera", user_id: john.id)
 
