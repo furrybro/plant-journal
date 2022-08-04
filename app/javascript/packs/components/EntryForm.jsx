@@ -31,7 +31,7 @@ function EntryForm({ organismId, setEntries, modal, setModal }) {
 
         fetch(`/api/v1/entries/`, {
             method: "POST",
-            body: formData
+            body: formData,
         })
             .then(result => result.json())
             .then(() => fetch(`/api/v1/entries/get_by_organism/${organismId}`))

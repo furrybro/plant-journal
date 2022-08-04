@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, CardBody, CardTitle, Col, CardSubtitle, CardImg, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
-function OrganismCard({ user, name, species, image, organismId, setOrganismIdToEdit, setOrganisms, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm, deleteModal, setDeleteModal }) {
-
+function OrganismCard({ name, species, image, organismId, setOrganismIdToEdit, setOrganismNameToEdit, setOrganismSpeciesToEdit, setOrganismForm, deleteModal, setDeleteModal }) {
     function sendOrganismToEdit(e) {
         setOrganismNameToEdit(e.target.value);
         setOrganismSpeciesToEdit(e.target.title);

@@ -3,8 +3,7 @@ import { Card, Col, CardBody, Button, CardImg, CardTitle, CardSubtitle } from "r
 import cactus from "/app/assets/images/cactus";
 
 function AddOrganismCard({ modal, setModal }) {
-
-    const toggle = () => setModal(!modal); 
+    const toggle = () => setModal(!modal);
 
     return (
         <Col className="col-12 col-md-6 col-lg-4">

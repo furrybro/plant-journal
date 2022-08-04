@@ -3,7 +3,6 @@ import { Col, Card, CardImg, CardBody, CardSubtitle, Button, CardText } from "re
 import cactus from "/app/assets/images/cactus";
 
 function AddEntryCard({ modal, setModal }) {
-
     const toggle = () => setModal(!modal);
 
     return (

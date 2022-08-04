@@ -1,8 +1,7 @@
 import React from "react";
 import { Card, CardImg, CardSubtitle, CardText, CardBody, Col, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
-function EntryCard({ entryId, setEntries, formatDate, entryNote, entryDate, image, setNoteToEdit, setDateToEdit, setEntryId, setEntryForm, organismId, deleteModal, setDeleteModal }) {
-
+function EntryCard({ entryId, formatDate, entryNote, entryDate, image, setNoteToEdit, setDateToEdit, setEntryId, setEntryForm, deleteModal, setDeleteModal }) {
     function handleEditEntry() {
         setNoteToEdit(entryNote);
         setDateToEdit(entryDate);

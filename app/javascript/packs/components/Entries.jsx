@@ -73,9 +73,9 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
         let formatDate = entryDate.toLocaleString(DateTime.DATETIME_FULL);
 
         if (entry.entry_image === null) {
-            return <EntryCard key={entry.id} entryId={entry.id} setEntries={setEntries} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} organismId={organismId} deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
+            return <EntryCard key={entry.id} entryId={entry.id} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
         } else {
-            return <EntryCard key={entry.id} entryId={entry.id} setEntries={setEntries} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} image={entry.entry_image.url} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} organismId={organismId} deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
+            return <EntryCard key={entry.id} entryId={entry.id} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} image={entry.entry_image.url} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
         }
     });
 

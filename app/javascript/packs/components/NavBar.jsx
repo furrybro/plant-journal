@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { NavbarBrand, Nav, NavbarToggler, NavItem } from "reactstrap";
 
-
 function NavBar({ user, setUser, showOrganismName }) {
     const navigate = useNavigate();
 
@@ -49,7 +48,6 @@ function NavBar({ user, setUser, showOrganismName }) {
                 null
             )}
         </div>
-
     );
 }
 

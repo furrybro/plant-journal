@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, FormGroup, Input, Label, Modal, FormText } from "reactstrap";
+import { Form, Button, FormGroup, Input, Label, Modal } from "reactstrap";
 
 function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit, setOrganismNameToEdit, organismSpeciesToEdit, setOrganismSpeciesToEdit, organismForm, setOrganismForm, modal, setModal, deleteModal, setDeleteModal }) {
     const [newOrganismName, setNewOrganismName] = useState("");
@@ -33,7 +33,7 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
 
         fetch("/api/v1/organisms", {
             method: "POST",
-            body: formData
+            body: formData,
         })
             .then(result => result.json())
             .then(() => fetch(`/api/v1/organisms/get_by_user/${user.id}`))
