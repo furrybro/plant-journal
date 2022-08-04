@@ -38,7 +38,7 @@ function NavBar({ user, setUser, showOrganismName }) {
                                     <a className="nav-link" href="/">{user.username}'s Garden</a>
                                 </li>
                                 <li>
-                                    <a className="nav-link" onClick={handleLogoutClick}>Logout</a>
+                                    <a className="nav-link" href="#" onClick={handleLogoutClick}>Logout</a>
                                 </li>
                             </ul>
                         </div>
