@@ -1,22 +1,18 @@
 import React from "react";
 import { Card, CardImg, CardSubtitle, CardText, CardBody, Col, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
-function EntryCard({ entryId, setEntries, formatDate, entryNote, entryDate, image, setNoteToEdit, setDateToEdit, setEntryId, setEntryForm, organismId }) {
-
-    function handleDeleteEntry(e) {
-        fetch(`/api/v1/entries/${e.target.value}`, {
-            method: "DELETE"
-        })
-            .then(() => fetch(`/api/v1/entries/get_by_organism/${organismId}`))
-            .then(result => result.json())
-            .then(result => setEntries(result));
-    }
+function EntryCard({ entryId, setEntries, formatDate, entryNote, entryDate, image, setNoteToEdit, setDateToEdit, setEntryId, setEntryForm, organismId, deleteModal, setDeleteModal }) {
 
     function handleEditEntry() {
         setNoteToEdit(entryNote);
         setDateToEdit(entryDate);
         setEntryId(entryId);
         setEntryForm(true);
+    }
+
+    function sendEntryToDelete(e) {
+        setEntryId(entryId);
+        setDeleteModal(!deleteModal);
     }
 
     return (
@@ -40,7 +36,7 @@ function EntryCard({ entryId, setEntries, formatDate, entryNote, entryDate, imag
                             <DropdownItem onClick={handleEditEntry}>
                                 edit entry
                             </DropdownItem>
-                            <DropdownItem value={entryId} onClick={handleDeleteEntry}>
+                            <DropdownItem value={entryId} onClick={sendEntryToDelete}>
                                 delete entry
                             </DropdownItem>
                         </DropdownMenu>
