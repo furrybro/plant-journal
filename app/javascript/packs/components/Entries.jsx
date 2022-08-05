@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import AddEntryCard from "./AddEntryCard";
 
 function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
-    const [entries, setEntries] = useState([]);
+    const [entries, setEntries] = useState(null);
     const [noteToEdit, setNoteToEdit] = useState("");
     const [dateToEdit, setDateToEdit] = useState(DateTime.now());
     const [entryId, setEntryId] = useState();
@@ -29,6 +29,10 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
             .then(result => result.json())
             .then(result => setShowOrganismName(`${result.name} the ${result.species}`));
     }, []);
+
+    if (entries === null) {
+        return <div></div>
+    }
 
     function changeNote(e) {
         let newNote = e.target.value;
