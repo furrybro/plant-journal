@@ -15,16 +15,14 @@ function EntryCard({ entryId, formatDate, entryNote, entryDate, image, setNoteTo
     }
 
     return (
-        <Col className="col-12 col-md-6 col-lg-4">
-            <Card style={{ fontFamily: 'Poppins' }}>
-                <CardImg
+        <div style={{ fontFamily: 'Poppins', width: '18rem' }} className="card h-100">
+                <img
                     alt="entry image placeholder"
                     src={image !== undefined ? image : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/house-plants-1629187361.jpg?crop=0.288xw:0.577xh;0.0465xw,0.205xh&resize=640:*"}
-                    top
                     style={{ height: '35vh', objectFit: 'cover' }}
-                    width="100%"
+                    className="card-img-top"
                 />
-                <CardBody>
+                <div className="card-body">
                     <CardSubtitle style={{ fontWeight: 'bold' }}>{formatDate}</CardSubtitle>
                     <CardText style={{ height: '45px', overflow: 'auto', maxHeight: '45px' }}>{entryNote}</CardText>
                     <UncontrolledButtonDropdown style={{ float: 'right' }}>
@@ -40,9 +38,8 @@ function EntryCard({ entryId, formatDate, entryNote, entryDate, image, setNoteTo
                             </DropdownItem>
                         </DropdownMenu>
                     </UncontrolledButtonDropdown>
-                </CardBody>
-            </Card>
-        </Col>
+                </div>
+            </div>
     );
 }
 

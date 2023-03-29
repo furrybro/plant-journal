@@ -109,7 +109,7 @@ function OrganismForm({ user, setOrganisms, organismIdToEdit, organismNameToEdit
                         <Label>Photo:</Label>
                         <Input onChange={handleNewOrgPhoto} type="file" accept="image/*" placeholder="Upload photo here"></Input>
                     </FormGroup>
-                    <Button onClick={toggle} type="submit" disabled={!newOrganismName || !newOrganismSpecies || !newOrganismPhoto}>Add new plant</Button>
+                    <Button onClick={toggle} type="submit" disabled={!newOrganismName || !newOrganismSpecies || !newOrganismPhoto}>add new plant</Button>
                 </Form>
             </Modal>
             <Modal centered isOpen={organismForm} toggle={editToggle}>

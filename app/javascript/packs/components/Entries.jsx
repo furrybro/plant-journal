@@ -77,20 +77,28 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
         let formatDate = entryDate.toLocaleString(DateTime.DATETIME_FULL);
 
         if (entry.entry_image === null) {
-            return <EntryCard key={entry.id} entryId={entry.id} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
+            return (
+                <div className="col">
+                    <EntryCard key={entry.id} entryId={entry.id} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
+                </div>
+            )
         } else {
-            return <EntryCard key={entry.id} entryId={entry.id} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} image={entry.entry_image.url} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
+            return (
+                <div className="col">
+                    <EntryCard key={entry.id} entryId={entry.id} formatDate={formatDate} entryNote={entry.note} entryDate={entryDate} image={entry.entry_image.url} setNoteToEdit={setNoteToEdit} setDateToEdit={setDateToEdit} setEntryId={setEntryId} setEntryForm={setEntryForm} deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
+                </div>
+            )
         }
     });
 
-    const numRequired = 2;
-    let numExtraFormCards = Math.max(numRequired - entries.length, 0);
+    // const numRequired = 2;
+    // let numExtraFormCards = Math.max(numRequired - entries.length, 0);
 
-    let renderPlaceholderEntryCard = [];
+    // let renderPlaceholderEntryCard = [];
 
-    for (let i = 0; i < numExtraFormCards; i++) {
-        renderPlaceholderEntryCard.push(<AddEntryCard modal={modal} setModal={setModal} />);
-    }
+    // for (let i = 0; i < numExtraFormCards; i++) {
+    //     renderPlaceholderEntryCard.push(<AddEntryCard modal={modal} setModal={setModal} />);
+    // }
 
     function handleDeleteEntry(e) {
         fetch(`/api/v1/entries/${entryId}`, {
@@ -102,41 +110,40 @@ function Entries({ entryForm, setEntryForm, setShowOrganismName }) {
     }
 
     return (
-        <div>
-            <Container>
-                <Row className="g-3">
-                    {renderEachEntry}
-                    {renderPlaceholderEntryCard}
+        <div className="container d-flex">
+            <div className="row g-3">
+                {renderEachEntry}
+                <div className="col">
                     <AddEntryCard modal={modal} setModal={setModal} />
-                </Row>
-                <Modal centered isOpen={modal} toggle={toggle}>
-                    <EntryForm organismId={organismId} setEntries={setEntries} modal={modal} setModal={setModal} />
-                </Modal>
-                <Modal centered isOpen={entryForm} toggle={editToggle}>
-                    <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em', fontFamily: 'Poppins' }} onSubmit={editEntry}>
-                        <FormGroup>
-                            <Label>Note:</Label>
-                            <Input value={noteToEdit} onChange={changeNote} type="textarea" placeholder="Edit note here"></Input>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Date:</Label>
-                            <Input value={dateToEdit.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={changeDate} type="datetime-local"></Input>
-                        </FormGroup>
-                        <Button type="submit">Edit your entry</Button>
-                    </Form>
-                </Modal>
-                <Modal centered isOpen={deleteModal} toggle={deleteToggle}>
-                    <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em', fontFamily: 'Poppins' }} onSubmit={handleDeleteEntry}>
-                        <FormGroup>
-                            <Button style={{ float: 'right' }} className="btn-close" aria-label="Close" onClick={deleteToggle}></Button>
-                            <Label>
-                                Are you sure you want to delete your entry?
-                            </Label>
-                        </FormGroup>
-                        <Button style={{ float: 'right' }} color="danger" onClick={deleteToggle} type="submit">yes, delete entry</Button>
-                    </Form>
-                </Modal>
-            </Container>
+                </div>
+            </div>
+            <Modal centered isOpen={modal} toggle={toggle}>
+                <EntryForm organismId={organismId} setEntries={setEntries} modal={modal} setModal={setModal} />
+            </Modal>
+            <Modal centered isOpen={entryForm} toggle={editToggle}>
+                <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em', fontFamily: 'Poppins' }} onSubmit={editEntry}>
+                    <FormGroup>
+                        <Label>Note:</Label>
+                        <Input value={noteToEdit} onChange={changeNote} type="textarea" placeholder="Edit note here"></Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Date:</Label>
+                        <Input value={dateToEdit.toFormat("yyyy-MM-dd'T'HH:mm")} onChange={changeDate} type="datetime-local"></Input>
+                    </FormGroup>
+                    <Button type="submit">Edit your entry</Button>
+                </Form>
+            </Modal>
+            <Modal centered isOpen={deleteModal} toggle={deleteToggle}>
+                <Form style={{ backgroundColor: 'rgba(176, 202, 148)', padding: '15px', borderRadius: '.5em', fontFamily: 'Poppins' }} onSubmit={handleDeleteEntry}>
+                    <FormGroup>
+                        <Button style={{ float: 'right' }} className="btn-close" aria-label="Close" onClick={deleteToggle}></Button>
+                        <Label>
+                            Are you sure you want to delete your entry?
+                        </Label>
+                    </FormGroup>
+                    <Button style={{ float: 'right' }} color="danger" onClick={deleteToggle} type="submit">yes, delete entry</Button>
+                </Form>
+            </Modal>
         </div>
     );
 }

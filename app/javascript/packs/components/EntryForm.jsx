@@ -37,7 +37,7 @@ function EntryForm({ organismId, setEntries, modal, setModal }) {
             .then(() => fetch(`/api/v1/entries/get_by_organism/${organismId}`))
             .then(result => result.json())
             .then(result => setEntries(result));
-        
+
         e.target.reset();
         setNewEntryNote("");
         setNewEntryDate(DateTime.now());
@@ -59,7 +59,7 @@ function EntryForm({ organismId, setEntries, modal, setModal }) {
                     <Label>Photo:</Label>
                     <Input onChange={handleNewEntryPhoto} type="file" accept="image/*" placeholder="Upload photo here"></Input>
                 </FormGroup>
-                <Button onClick={() => setModal(!modal)} type="submit" disabled={!newEntryNote || !newEntryDate || !newEntryPhoto}>Add new entry</Button>
+                <Button onClick={() => setModal(!modal)} type="submit" disabled={!newEntryNote || !newEntryDate || !newEntryPhoto}>add new entry</Button>
             </Form>
         </div>
     );

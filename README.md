@@ -1,5 +1,9 @@
 # README
 
+Rails - bundle exec rails s
+Webpack - ./bin/webpack-dev-server
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
